@@ -10,8 +10,7 @@
   * [6. Control de versiones (Git)](#6-control-de-versiones-git)
     * [6.1. Commits con errores de construcción](#61-commits-con-errores-de-construcción)
     * [6.2. Push con commits nuevos en el servidor remoto](#62-push-con-commits-nuevos-en-el-servidor-remoto)
-    * [6.3. Hacer pull ](#63-hacer-pull)
-    * [6.4. Pull con cambios locales no commiteados ](#64-pull-con-cambios-locales-no-commiteados)
+    * [6.3. Pull con cambios locales no commiteados ](#63-pull-con-cambios-locales-no-commiteados)
   * [7. Tests](#7-tests)
     * [7.1 Tests por módulo](#71-tests-por-módulo)
     * [7.2 El módulo tests](#72-el-módulo-test)
@@ -21,16 +20,17 @@
   * [8. Guía de estilo](#8-guía-de-estilo)
     * [8.1. Código fuente](#81-código-fuente)
     * [8.2. Control de versiones](#82-control-de-versiones)
+  * [9. Instrucciones de ejecución](#9-instrucciones-de-ejecución)
+    * [9.1 Ejecución con Maven](#91-ejecución-con-maven)
+      * [9.1.1 Ejecución de la aplicación con Tomcat y MySQL](#911-ejecución-de-la-aplicación-con-tomcat-y-mysql)
+      * [9.1.2 Ejecución de la aplicación con Tomcat y MySQL con redespliegue automático](#912-ejecución-de-la-aplicación-con-tomcat-y-mysql-con-redespliegue-automático)
+    * [9.2 Construcción con tests de unidad e integración](#92-construcción-con-tests-de-unidad-e-integración)
+    * [9.3 Construcción con tests de unidad, integración y aceptación](#93-construcción-con-tests-de-unidad-integración-y-aceptación)
 
 
 ## 1. Empezando
 
-El proyecto LETTA se desarrolla en un entorno de integración continua con
-despliegue continuo en un servidor de pre-producción (*staging*). Este entorno
-está compuesto por varias herramientas que automatizan el proceso, todas ellas
-dirigidas por el POM de este proyecto.
-
-En este documento encontrarás una descripción de este entorno y las
+En este documento encontrarás una descripción del entorno de desarrollo y las
 instrucciones para saber cómo contribuir correctamente a este proyecto.
 
 
@@ -67,14 +67,19 @@ utilidades.
 * **entities**:
 Módulo que contiene las clases de dominio (entidades).
 * **dao**:
-Módulo que contiene los EJB del sistema, que serán utilizados tanto por la capa
-JSF como por la capa REST.
+Módulo que gestiona la persistencia de las entidades utilizando el API estándar de Java JDBC.
 * **rest**:
 Módulo que contiene una capa de servicios REST.
+* **js/view**:
+Módulo que atiende a los eventos que se producen en la capa HTML y solicita información a la capa js/dao para construír la vista HTML.
+* **js/dao**:
+Módulo que recibe las solicitudes de la capa js/view y solicita información al backend mediante AJAX.
+* **HTML**:
+Módulo que contiene las plantillas necesarias para presentar la información.
 
 
 ## 4. Entorno de desarrollo.
-Las herramientas que componen el entorno de integración continua son las siguientes:
+Las herramientas que componen el entorno de desarrollo son las siguientes:
 
 * **Maven 3**: Maven es un entorno de construcción de proyectos para Java. Esta será una herramienta clave, ya que es quien dirigirá todo el proyecto. Es necesario que tengas instalado Maven 3 en tu equipo de desarrollo para poder construir el proyecto.
 * **Kunagi**: Es una herramienta de gestión de proyectos Scrum. En ella encontrarás toda la información sobre las funcionalidades desarrolladas y por desarrollar, el alcance de las publicaciones, el estado de desarrollo, etc.
@@ -135,9 +140,7 @@ deben ser estables, lo que supone que el código debe incluir tests y todos debe
 superarse existosamente al construir la aplicación en local.
 
 ### 6.1. *Commits* con errores de construcción
-Ambas ramas estarán controladas por el servidor de integración que ejecutará los
-tests inmediatamente después de que se haga un *commit*. En el caso de que una
-**construcción falle** en Jenkis es muy importante **deshacer el último *commit*
+En el caso de que una **construcción falle** es muy importante **deshacer el último *commit*
 para volver a un estado estable**.
 
 Aunque existen varias formas de hacer esto, la forma más directa es:
@@ -165,16 +168,7 @@ Este comando iniciará un proceso de *rebase* entre desde la rama local hacia la
 rama remota. Es decir, los *commit* locales no *pusheados* pasarán a tener como
 padre el último *commit* remoto.
 
-### 6.3. Hacer *pull*
-Antes de hacer un *pull* siempre se debe revisar el servidor de integración
-continua. En el caso de que haya una construcción en ejecución **no debe hacerse
-*pull*** hasta que finalice y se compruebe que ha sido con éxito.
-
-En el caso de que la construcción falle, debe esperarse a que el repositorio
-vuelva a un estado estable (ver [sección 6.1](#61-commits-con-errores-de-construcción))
-antes de hacer *pull*.
-
-### 6.4. *Pull* con cambios locales no *commiteados*
+### 6.3. *Pull* con cambios locales no *commiteados*
 En caso de que nos encontremos en medio de un *commit* (no se ha completado los
 cambios necesarios para realizar un *commit*) y deseemos descargar nuevos
 *commits* del servidor central, podemos hacerlo utilizando los comandos:
@@ -261,3 +255,70 @@ ordenada, atacando partes concretas.
 para evaluar una posible solución. En tal caso, es recomendable que esto se
 haga en una rama independiente para evitar enviar *commits* accidentalmente a
 la rama *develop* remota.
+
+
+## 9. Instrucciones de ejecución
+
+### 9.1. Ejecución con Maven
+La configuración de Maven ha sido preparada para permitir varios tipos de
+ejecución.
+
+### 9.1.1. Ejecución de la aplicación con Tomcat y MySQL
+
+El proyecto está configurado para poder ejecutar la aplicación sin tener que
+realizar ninguna configuración adicional salvo tener disponible un servidor
+MySQL en local.
+
+El fichero del proyecto 'db/mysql-with-inserts.sql' contiene
+todas las consultas necesarias para crear la base de datos y el usuario
+requeridos, con datos de ejemplo. Por lo tanto, podemos
+configurar inicialmente la base de datos con el siguiente
+comando (desde la raíz el proyecto):
+
+* Con datos: `mysql -u root -p < db/mysql-with-inserts.sql`
+
+Una vez configurada la base de datos podemos lanzar la ejecución con el comando:
+
+`mvn -Prun-tomcat-mysql -DskipTests=true package cargo:run`
+
+La aplicación se servirá en la URL local: http://localhost:9080/LETTA
+
+Para detener la ejecución podemos utilizar `Ctrl+C`.
+
+### 9.1.2. Ejecución de la aplicación con Tomcat y MySQL con redespliegue automático
+
+Durante el desarrollo es interesante que la apliación se redespliegue de forma
+automática cada vez que se hace un cambio. Para ello podemos utilizar el
+siguiente comand:
+
+`mvn -Prun-tomcat-mysql -DskipTests=true package cargo:start fizzed-watcher:run`
+
+La aplicación se servirá en la URL local: http://localhost:9080/LETTA
+
+Para detener la ejecución podemos utilizar `Ctrl+C`.
+
+### 9.2. Construcción con tests de unidad e integración
+
+En esta construcción se ejecutarán todos los tests relacionados con el backend:
+
+* **Unidad**: se utilizan para testear las entidades y las capas DAO y REST de
+forma aislada.
+* **Integración**: se utilizan para testear las capas REST y DAO de forma
+integrada. Para este tipo de pruebas se utiliza una base de datos HSQL en
+memoria.
+
+El comando para lanzar esta construcción es:
+
+`mvn install`
+
+### 9.3. Construcción con tests de unidad, integración y aceptación
+
+Esta construcción es similar a la previa, añadiendo las **pruebas de
+aceptación**, que comprueban que las fucionalidades de la aplicación están
+correctamente implementadas.
+
+En estas pruebas se descarga y arranca el un servidor Tomcat 8 en el que se
+despliega la aplicación configurada para utilizar una base de datos HSQL.
+
+`mvn -Pacceptance-tests-cargo install`
+
