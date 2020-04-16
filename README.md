@@ -25,7 +25,7 @@ Una vez configurada la base de datos podemos lanzar la ejecución con el comando
 
 `mvn -Prun-tomcat-mysql -DskipTests=true package cargo:run`
 
-La aplicación se servirá en la URL local: http://localhost:9080/LETTA
+La aplicación se servirá en la URL local: http://localhost:9080/letta
 
 Para detener la ejecución podemos utilizar `Ctrl+C`.
 
@@ -37,7 +37,7 @@ siguiente comand:
 
 `mvn -Prun-tomcat-mysql -DskipTests=true package cargo:start fizzed-watcher:run`
 
-La aplicación se servirá en la URL local: http://localhost:9080/LETTA
+La aplicación se servirá en la URL local: http://localhost:9080/letta
 
 Para detener la ejecución podemos utilizar `Ctrl+C`.
 
