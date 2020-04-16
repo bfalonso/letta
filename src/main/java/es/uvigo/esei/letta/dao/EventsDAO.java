@@ -12,12 +12,35 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import es.uvigo.esei.letta.dao.DAOException;
 import es.uvigo.esei.letta.entities.Event;
 
 public class EventsDAO extends DAO{
 	
 	private final static Logger LOG = Logger.getLogger(EventsDAO.class.getName());
 	
+
+	public Event get(int id) throws DAOException, IllegalArgumentException {
+		try (final Connection conn = this.getConnection()) {
+			final String query = "SELECT * FROM event WHERE id=?";
+
+			try (final PreparedStatement statement = conn.prepareStatement(query)) {
+				statement.setInt(1, id);
+
+				try (final ResultSet result = statement.executeQuery()) {
+					if (result.next()) {
+						return rowToEntity(result);
+					} else {
+						throw new IllegalArgumentException("Invalid id");
+					}
+				}
+			}
+		} catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Error getting an event", e);
+			throw new DAOException(e);
+		}
+	}
 	
 	public List<Event> listRecent() throws DAOException{
 		
