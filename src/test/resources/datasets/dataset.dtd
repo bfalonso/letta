@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT dataset (event*)>
+<!ELEMENT event EMPTY>
+<!ATTLIST event
+    id CDATA #IMPLIED
+    title CDATA #IMPLIED
+    description CDATA #IMPLIED
+    event_date CDATA #IMPLIED
+    creation_date CDATA #IMPLIED
+    location CDATA #IMPLIED
+    category CDATA #IMPLIED
+    capacity CDATA #IMPLIED
+    num_participants CDATA #IMPLIED
+>
