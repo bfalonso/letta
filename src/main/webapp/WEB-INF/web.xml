@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   version="3.1">
-  <display-name>LETTA</display-name>
+  <display-name>letta</display-name>
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -56,6 +56,6 @@
   
   <login-config>
     <auth-method>BASIC</auth-method>
-    <realm-name>LETTA</realm-name>
+    <realm-name>letta</realm-name>
   </login-config>
 </web-app>

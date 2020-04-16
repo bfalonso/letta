@@ -6,7 +6,7 @@
 	<artifactId>letta</artifactId>
 	<packaging>war</packaging>
 	<version>0.1.16</version>
-	<name>LETTA</name>
+	<name>letta</name>
 
 	<licenses>
 		<license>
@@ -184,7 +184,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>LETTA</finalName>
+		<finalName>letta</finalName>
 
 		<plugins>
 			<plugin>
