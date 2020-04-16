@@ -392,9 +392,9 @@
 								<properties>
 									<cargo.servlet.port>9080</cargo.servlet.port>
 									<cargo.datasource.datasource.h2>
-										cargo.datasource.jndi=jdbc/daaexample|
+										cargo.datasource.jndi=jdbc/letta|
 										cargo.datasource.driver=com.mysql.jdbc.Driver|
-										cargo.datasource.url=jdbc:mysql://localhost/daaexample|
+										cargo.datasource.url=jdbc:mysql://localhost/letta|
 										cargo.datasource.username=daa|
 										cargo.datasource.password=daa|
 										cargo.datasource.maxActive=8|
