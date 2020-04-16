@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -95,4 +96,30 @@ public class EventsResourceTest extends JerseyTest{
 		
 		assertThat(events, containsEventsInAnyOrder(events()));
 	}
+
+	// Hace falta implementar los tests que soporten el sistema de login.
+	// Test: Un usuario no registrado solo podrá ver cierta información [category title description capacity]
+	@Test
+	public void testGetValidId() throws IOException {
+		final Response response = target("events/" + existentId()).request().get();
+		
+		assertThat(response, hasOkStatus());
+		final Event event = response.readEntity(Event.class);
+		assertThat(event, is(equalsToEvent(existentEvent())));
+	}
+	
+	@Test
+	public void testGetInvalidId() throws IOException {
+		final Response response = target("events/" + nonExistentId()).request().get();
+
+		assertThat(response, hasBadRequestStatus());
+	}
+	
+	
+	
+
+	
+	
+	
+	
 }
