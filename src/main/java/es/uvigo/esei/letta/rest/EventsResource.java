@@ -33,6 +33,41 @@ public class EventsResource {
 		this.dao = dao;
 	}
 	
+	
+	/**
+	 * Returns an event with the provided identifier.
+	 * 
+	 * @param id the identifier of the event to retrieve.
+	 * @return a 200 OK response with an event that has the provided identifier.
+	 * If the identifier does not corresponds with any event, a 400 Bad Request
+	 * response with an error message will be returned. If an error happens
+	 * while retrieving the information, a 500 Internal Server Error response with an
+	 * error message will be returned.
+	 */
+	@GET
+	@Path("/{id}")
+	public Response get(
+		@PathParam("id") int id
+	) {
+		try {
+			final Event event = this.dao.get(id);
+			
+			return Response.ok(event).build();
+		} catch (IllegalArgumentException iae) {
+			LOG.log(Level.FINE, "Invalid event id in get method", iae);
+			
+			return Response.status(Response.Status.BAD_REQUEST)
+				.entity(iae.getMessage())
+			.build();
+		} catch (DAOException e) {
+			LOG.log(Level.SEVERE, "Error getting an event", e);
+			
+			return Response.serverError()
+				.entity(e.getMessage())
+			.build();
+		}
+	}
+	
 	@GET
 	public Response listRecent() {
 		try {
