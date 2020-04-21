@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -69,11 +70,28 @@ public class EventsResource {
 	}
 	
 	@GET
+	@Path("/recent")
 	public Response listRecent() {
 		try {
 			return Response.ok(this.dao.listRecent()).build();
 		} catch (DAOException e) {
 			LOG.log(Level.SEVERE, "Error listing events", e);
+			return Response.serverError().entity(e.getMessage()).build();
+		}
+	}
+	
+	@GET
+	// tiene que ser un query param
+	public Response search(@QueryParam("search") String params) {
+		try {
+			return Response.ok(this.dao.search(params)).build();
+		}
+		catch (IllegalArgumentException iae) {
+			LOG.log(Level.FINE, "Invalid parameter in search method", iae);
+			return Response.status(Response.Status.BAD_REQUEST).entity(iae.getMessage()).build();
+		}
+		catch (DAOException e) {
+			LOG.log(Level.SEVERE, "Error searching events", e);
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
