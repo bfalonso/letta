@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>es.uvigo.esei.daa</groupId>
+	<groupId>es.uvigo.esei.letta</groupId>
 	<artifactId>letta</artifactId>
 	<packaging>war</packaging>
 	<version>0.1.16</version>
@@ -395,8 +395,8 @@
 										cargo.datasource.jndi=jdbc/letta|
 										cargo.datasource.driver=com.mysql.jdbc.Driver|
 										cargo.datasource.url=jdbc:mysql://localhost/letta|
-										cargo.datasource.username=daa|
-										cargo.datasource.password=daa|
+										cargo.datasource.username=letta|
+										cargo.datasource.password=letta|
 										cargo.datasource.maxActive=8|
 										cargo.datasource.maxIdle=4|
 										cargo.datasource.maxWait=10000
