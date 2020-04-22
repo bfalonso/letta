@@ -44,6 +44,7 @@ var EventsView = (function() {
 
 	var createEventRow = function(event) {
 		var description;
+		var image = "img/internet.svg";
 		
 		if(event.description.length > 5){
 			description = event.description.substr(0, 30) + "...";
@@ -51,8 +52,32 @@ var EventsView = (function() {
 			description = event.description + ".";
 		}
 		
+		switch(event.category){
+		case 'sports':
+			image = "img/sports.svg";
+			break;
+		case 'cinema':
+			image = "img/movie.svg";
+			break;
+		case 'theater':
+			image = "img/theater.svg";
+			break;
+		case 'music':
+			image = "img/music.svg";
+			break;
+		case 'literature':
+			image = "img/book.svg";
+			break;
+		case 'videogames':
+			image = "img/videogames.svg"
+			break;
+		case 'series':
+			image = "img/tv.svg";
+			break;		
+		}
+		
 		return '<div class="col-lg-4">\
-					<img class="rounded-circle" src="img/internet.svg"\
+					<img class="rounded-circle" src=' + image + '\
 						alt="Generic placeholder image" width="140" height="140"\
 						id="event-category">\
 					<h2 id="event-title">'+ event.title + '</h2>\
