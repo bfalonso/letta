@@ -1,5 +1,6 @@
+var dao;
+
 var EventsView = (function() {
-	var dao;
 	
 	// Referencia a this que permite acceder a las funciones públicas desde las funciones de jQuery.
 	var self;
@@ -38,14 +39,24 @@ var EventsView = (function() {
 			</div>'
 		);
 	};
+	
+	
 
 	var createEventRow = function(event) {
+		var description;
+		
+		if(event.description.length > 5){
+			description = event.description.substr(0, 30) + "...";
+		}else{
+			description = event.description + ".";
+		}
+		
 		return '<div class="col-lg-4">\
 					<img class="rounded-circle" src="img/internet.svg"\
 						alt="Generic placeholder image" width="140" height="140"\
 						id="event-category">\
 					<h2 id="event-title">'+ event.title + '</h2>\
-					<p id="event-description">' + event.description + '.</p>\
+					<p id="event-description">' + description + '.</p>\
 					<div class="row-lg-1">\
 						<small class="text-muted" id="event-location"> ' + event.location + '</small>\
 					</div>\
@@ -59,8 +70,8 @@ var EventsView = (function() {
 						</div>\
 					</div>\
 					<p>\
-						<a class="btn btn-secondary mt-2" href="#" role="button">Ver\
-							detalles</a>\
+						<button class="btn btn-secondary mt-2" role="button"  onclick="eventDetailView(' + event.id + ');" >Ver\
+							detalles</button>\
 					</p>\
 		</div>';
 	};
@@ -77,3 +88,38 @@ var EventsView = (function() {
 	return EventsView;
 	
 })();
+
+
+var eventDetailView = function (idEvent) {
+	
+	dao.get(idEvent,
+			function (event){
+				
+				$(".modal-title").text(event.title);
+				$("#eventDetailDescription").text(event.description);
+				$("#eventDetailLocation").text(event.location);
+				$("#eventDetailNum_participants").text(event.num_participants);
+				$("#eventDetailCapacity").text(event.capacity);
+				$("#eventDetailDuration").text(event.duration);
+
+				$("#eventDetailCreation_date").text(event.creation_date);
+				$("#eventDetailEvent_date").text(event.event_date);
+				
+		
+				$(".eventDetailModal").show();
+		
+			},
+			function() {
+		    	alert('No ha sido posible acceder al evento.');
+			}		
+	);
+	
+	
+};
+
+
+
+
+
+
+

@@ -22,6 +22,12 @@ var EventsDAO = (function() {
 		type : 'GET'
 	    }, done, fail, always);
 	};
+	this.get = function(idEvent, done, fail, always) {
+	    requestByAjax({
+		url : resourcePath + idEvent,
+		type : 'GET'
+	    }, done, fail, always);
+	};
     }
 
     return EventsDAO;
