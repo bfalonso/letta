@@ -115,7 +115,8 @@ public class EventsDAO extends DAO{
 			row.getString("location"),
 			row.getString("category"),
 			row.getInt("capacity"),
-			row.getInt("num_participants")
+			row.getInt("num_participants"),
+			row.getInt("duration")
 		);
 	}
 

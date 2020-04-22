@@ -11,4 +11,5 @@
     category CDATA #IMPLIED
     capacity CDATA #IMPLIED
     num_participants CDATA #IMPLIED
+    duration CDATA #IMPLIED
 >

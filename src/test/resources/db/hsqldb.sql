@@ -8,5 +8,6 @@ CREATE TABLE event (
     creation_date DATETIME NOT NULL,
     capacity int NOT NULL,
     num_participants int NOT NULL,
+    duration int NOT NULL,
 	PRIMARY KEY (id)
 );

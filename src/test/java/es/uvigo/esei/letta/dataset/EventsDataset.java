@@ -14,8 +14,8 @@ public class EventsDataset {
 	
 	public static Event[] events() {
 		return new Event[] {
-				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15),
-				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15)
+				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5)
 		};
 	}
 	
@@ -50,7 +50,7 @@ public class EventsDataset {
 	}
 	
 	public static Event nonExistentEvent() {
-		return new Event(nonExistentId(), "title", "description", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), "ourense", "cinema", 20, 15);
+		return new Event(nonExistentId(), "title", "description", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), "ourense", "cinema", 20, 15, 5);
 	}
 	
 	public static String newTitle() {
@@ -85,7 +85,11 @@ public class EventsDataset {
 		return 4;
 	}
 	
+	public static int newDuration() {
+		return 5;
+	}
+	
 	public static Event newEvent() {
-		return new Event(events().length + 1, newTitle(), newDescription(), newEvent_date(), newCreation_date(), newLocation(), newCategory(), newCapacity(), newNum_participants());
+		return new Event(events().length + 1, newTitle(), newDescription(), newEvent_date(), newCreation_date(), newLocation(), newCategory(), newCapacity(), newNum_participants(), newDuration());
 	}
 }

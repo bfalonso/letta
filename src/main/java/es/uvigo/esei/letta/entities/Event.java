@@ -14,10 +14,11 @@ public class Event implements Comparable<Event>{
 	private String category;
 	private int capacity;
 	private int num_participants;
+	private int duration;
 	
 	Event () {}
 	
-	public Event(int id, String title, String description, Date event_date, Date creation_date, String location, String category, int capacity, int num_participants) {
+	public Event(int id, String title, String description, Date event_date, Date creation_date, String location, String category, int capacity, int num_participants, int duration) {
 		
 		this.id = id;
 		this.title = requireNonNull(title, "Title can't be null");
@@ -28,6 +29,7 @@ public class Event implements Comparable<Event>{
 		this.category = requireNonNull(category, "Category can't be null");
 		this.capacity = requireNonNull(capacity, "Capacity can't be null");
 		this.num_participants = requireNonNull(num_participants, "Number of participants can't be null");
+		this.duration = requireNonNull(num_participants, "Duration can't be null");
 		
 	}
 
@@ -92,6 +94,10 @@ public class Event implements Comparable<Event>{
 		int result = 1;
 		result = prime * result + id;
 		return result;
+	}
+
+	public int getDuration() {
+		return duration;
 	}
 
 }

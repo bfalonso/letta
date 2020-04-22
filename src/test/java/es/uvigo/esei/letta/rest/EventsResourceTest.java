@@ -88,7 +88,7 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testList() throws IOException {
-		final Response response = target("events").request()
+		final Response response = target("events/recent").request()
 		.get();
 		assertThat(response, hasOkStatus());
 

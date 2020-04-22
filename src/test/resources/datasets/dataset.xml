@@ -2,10 +2,10 @@
 <!DOCTYPE dataset SYSTEM "dataset.dtd">
 
 <dataset>
-	<event id="1" title="Title1" description="Description1" event_date="2019-10-10 00:00:00" creation_date="2019-10-10 00:00:00" location="Ourense" category="cinema" capacity="20" num_participants="15" />
-	<event id="2" title="Title2" description="Description2" event_date="2019-08-07 00:00:00" creation_date="2019-08-07 00:00:00" location="Pontevedra" category="sports" capacity="15" num_participants="8" />
-	<event id="3" title="Title3" description="Description3" event_date="2020-10-10 00:00:00" creation_date="2020-10-10 00:00:00" location="Ourense" category="theater" capacity="20" num_participants="20" />
-	<event id="4" title="Title4" description="Description4" event_date="2020-12-10 00:00:00" creation_date="2020-12-10 00:00:00" location="Santander" category="theater" capacity="20" num_participants="20" />
-	<event id="5" title="Title5" description="Description5" event_date="2020-12-20 01:00:00" creation_date="2020-12-20 01:00:00" location="Vigo" category="sports" capacity="20" num_participants="15" />
-	<event id="6" title="Title6" description="Description6" event_date="2020-12-15 01:00:00" creation_date="2020-12-15 01:00:00" location="Salamanca" category="cinema" capacity="20" num_participants="15" />
+	<event id="1" title="Title1" description="Description1" event_date="2019-10-10 00:00:00" creation_date="2019-10-10 00:00:00" location="Ourense" category="cinema" capacity="20" num_participants="15" duration="5" />
+	<event id="2" title="Title2" description="Description2" event_date="2019-08-07 00:00:00" creation_date="2019-08-07 00:00:00" location="Pontevedra" category="sports" capacity="15" num_participants="8" duration="5" />
+	<event id="3" title="Title3" description="Description3" event_date="2020-10-10 00:00:00" creation_date="2020-10-10 00:00:00" location="Ourense" category="theater" capacity="20" num_participants="20" duration="5" />
+	<event id="4" title="Title4" description="Description4" event_date="2020-12-10 00:00:00" creation_date="2020-12-10 00:00:00" location="Santander" category="theater" capacity="20" num_participants="20" duration="5" />
+	<event id="5" title="Title5" description="Description5" event_date="2020-12-20 01:00:00" creation_date="2020-12-20 01:00:00" location="Vigo" category="sports" capacity="20" num_participants="15" duration="5" />
+	<event id="6" title="Title6" description="Description6" event_date="2020-12-15 01:00:00" creation_date="2020-12-15 01:00:00" location="Salamanca" category="cinema" capacity="20" num_participants="15" duration="5" />
 </dataset>

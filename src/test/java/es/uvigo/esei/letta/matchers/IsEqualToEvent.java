@@ -25,7 +25,8 @@ public class IsEqualToEvent extends IsEqualToEntity<Event> {
 				&& checkAttribute("location", Event::getLocation, actual)
 				&& checkAttribute("category", Event::getCategory, actual)
 				&& checkAttribute("capacity", Event::getCapacity, actual)
-				&& checkAttribute("num_participants", Event::getNum_participants, actual);
+				&& checkAttribute("num_participants", Event::getNum_participants, actual)
+				&& checkAttribute("duration", Event::getDuration, actual);
 		}
 	}
 	
