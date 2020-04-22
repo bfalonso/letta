@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -77,6 +78,32 @@ public class EventsDAO extends DAO{
 		}
 		
 	}
+	
+	public List<Event> search(String params) throws DAOException{
+		
+		try (final Connection conn = this.getConnection()) {
+			// Create query
+			//  título y descripción
+			final String query = "SELECT * FROM event WHERE title LIKE ?";
+			try (final PreparedStatement statement = conn.prepareStatement(query)) {
+				statement.setString(1, "%" + params + "%");
+				try (final ResultSet result = statement.executeQuery()) {
+					List<Event> toret = new LinkedList<>();
+
+					while(result.next()) {
+						Event temp = rowToEntity(result);
+						toret.add(temp);
+					}
+					return toret;
+				}
+			}
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Error listing recent events", e);
+			throw new DAOException(e);
+		}
+	}
+	
 	
 	private Event rowToEntity(ResultSet row) throws SQLException {
 		return new Event(
