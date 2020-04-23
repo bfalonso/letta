@@ -28,6 +28,13 @@ var EventsDAO = (function() {
 		type : 'GET'
 	    }, done, fail, always);
 	};
+	this.searchEvents = function(query, done, fail, always) {
+	    requestByAjax({
+		url : resourcePath,
+		type : 'GET',
+		data: "search=" + query
+	    }, done, fail, always);
+	};
     }
 
     return EventsDAO;

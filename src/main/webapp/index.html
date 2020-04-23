@@ -18,13 +18,13 @@
 <body>
 	<!--  class="navbar fixed-top navbar-light bg-light" -->
 
-	<nav class="navbar fixed-top navbar-light bg-light">
-		<a class="navbar-brand" href="#"> <img src="img/logo.svg"
+	<nav class="navbar navbar-light bg-light">
+		<a id="logo" class="navbar-brand" href="#"> <img src="img/logo.svg"
 			height="20" alt="" />
 
 			<div class="row">
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search"
+				<form id="form-search" class="form-inline my-2 my-lg-0">
+					<input id="query" name="query" class="form-control mr-sm-2" type="search"
 						placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 					<a class="ml-5 mr-3 btn btn-primary" href="#">Login</a>
@@ -88,16 +88,9 @@
 		</div>
 
 
-
-		<!-- FIN CAROUSEL -->
-
-
-
 		<!-- INICIO LISTADO EVENTOS -->
 
 		<div class="container marketing">
-
-
 		</div>
 		<!-- FIN LISTADO EVENTOS -->
 
@@ -107,7 +100,7 @@
 
 	</main>
 
-	<footer class="container">
+	<footer class="container mt-5">
         <p class="float-right"><a href="#carouselExampleIndicators">Back to top</a></p>
         <p>© 2020-2021 SKUBA, Inc. · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
       </footer>
@@ -132,11 +125,24 @@
 	<script type="text/javascript">
 	$(document).ready(
 		function() {
-		    var view = new EventsView(new EventsDAO(),
+ 
+			$('#form-search').submit(function(event) {
+				event.preventDefault();
+				var query = $('#query').val();
+				view.doSearch(query);
+			});
+			
+			
+			$('#logo').click(function(event) {
+				event.preventDefault();
+				view.init();
+			});
+
+			var view = new EventsView(new EventsDAO(),
 		    	'marketing'
 	    	);
-
-		    view.init();
+			
+			view.init();
 		});
     </script>
     

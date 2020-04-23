@@ -14,6 +14,9 @@ var EventsView = (function() {
 		self = this;
 		
 		this.init = function() {
+			contRow = 0;
+			$('.' + listContainerId).html("");
+			$('#carouselExampleIndicators').show();
 			dao.listRecentEvents(function(events) {
 				$.each(events, function(key, event) {
 					if(contRow % 3 == 0){
@@ -27,6 +30,42 @@ var EventsView = (function() {
 			},
 			function() {
 			    	alert('No ha sido posible acceder al listado de eventos recientes.');
+			});
+			
+
+		};
+		
+		this.doSearch = function(query) {
+			contRow = 0;
+			$('.' + listContainerId).html("");
+			$('#carouselExampleIndicators').hide();
+			dao.searchEvents(query, function(events) {
+				if(events.length == 0){
+					var mensaje = "No hay resultados para tu búsqueda:"
+				}else{
+					var mensaje = "Los resultados de tu búsqueda:"
+				}
+				$('.' + listContainerId).append(
+						'<div class="section mt-3">\
+							<div class="col-md-12">\
+							<h4>' + mensaje + '</h4>\
+							<p>"' + query + '"</p>\
+							</div>\
+						</div>'
+				);
+				
+				$.each(events, function(key, event) {
+					if(contRow % 3 == 0){
+						rowId = 'events-row-' + contRow;
+						rowQuery = '#' + rowId;
+						insertEventsRow($('.' + listContainerId));
+					}
+					contRow++;
+					appendToRow(event);
+				});
+			},
+			function() {
+			    	alert('No hay ningún evento asociado a esta búsqueda.');
 			});
 			
 
