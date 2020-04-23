@@ -19,10 +19,13 @@ import static es.uvigo.esei.letta.matchers.IsEqualToEvent.equalsToEvent;
 import static javax.ws.rs.client.Entity.entity;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -120,16 +123,37 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testListSearchTitle() throws IOException {
-		final Response response = target("events").queryParam("search", "Title5").request()
+		final Response response = target("events").queryParam("search", "Title6").request()
 		.get();
 		assertThat(response, hasOkStatus());
 
 		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
 		final Event event = EventsDataset.event(6);
-		assertThat(event, equalsToEvent(event));
+		assertEquals(events.get(0), event);
 	}
 	
+	@Test
+	public void testListSearchDescription() throws IOException {
+		final Response response = target("events").queryParam("search", "Description6").request()
+		.get();
+		assertThat(response, hasOkStatus());
+
+		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		final Event event = EventsDataset.event(6);
+		assertEquals(events.get(0), event);
+	}
 	
+	@Test
+	public void testListSearchdescriptionOrdered() throws IOException {
+		final Response response = target("events").queryParam("search", "Description").request()
+		.get();
+		assertThat(response, hasOkStatus());
+
+		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
+		
+		assertEquals(events, eventOrdered);
+	}
 	
 	
 }
