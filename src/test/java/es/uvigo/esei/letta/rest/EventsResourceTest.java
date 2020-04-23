@@ -47,6 +47,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 
 import es.uvigo.esei.letta.LettaTestApplication;
+import es.uvigo.esei.letta.dataset.EventsDataset;
 import es.uvigo.esei.letta.entities.Event;
 import es.uvigo.esei.letta.listeners.ApplicationContextBinding;
 import es.uvigo.esei.letta.listeners.ApplicationContextJndiBindingTestExecutionListener;
@@ -88,8 +89,8 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testList() throws IOException {
-		final Response response = target("events/recent").request()
-		.get();
+
+		final Response response = target("events/recent/").request().get();
 		assertThat(response, hasOkStatus());
 
 		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
@@ -117,7 +118,16 @@ public class EventsResourceTest extends JerseyTest{
 	
 	
 	
+	@Test
+	public void testListSearchTitle() throws IOException {
+		final Response response = target("events").queryParam("search", "Title5").request()
+		.get();
+		assertThat(response, hasOkStatus());
 
+		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		final Event event = EventsDataset.event(6);
+		assertThat(event, equalsToEvent(event));
+	}
 	
 	
 	

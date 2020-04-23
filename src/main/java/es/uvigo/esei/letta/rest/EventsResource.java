@@ -83,6 +83,7 @@ public class EventsResource {
 	@GET
 	// tiene que ser un query param
 	public Response search(@QueryParam("search") String params) {
+
 		try {
 			return Response.ok(this.dao.search(params)).build();
 		}
@@ -91,7 +92,7 @@ public class EventsResource {
 			return Response.status(Response.Status.BAD_REQUEST).entity(iae.getMessage()).build();
 		}
 		catch (DAOException e) {
-			LOG.log(Level.SEVERE, "Error searching events", e);
+			LOG.log(Level.SEVERE, "Error searching events " + params, e);
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}

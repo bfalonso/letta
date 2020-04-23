@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -79,29 +80,86 @@ public class EventsDAO extends DAO{
 		
 	}
 	
-	public List<Event> search(String params) throws DAOException{
-		
-		try (final Connection conn = this.getConnection()) {
-			// Create query
-			//  título y descripción
-			final String query = "SELECT * FROM event WHERE title LIKE ?";
-			try (final PreparedStatement statement = conn.prepareStatement(query)) {
-				statement.setString(1, "%" + params + "%");
-				try (final ResultSet result = statement.executeQuery()) {
-					List<Event> toret = new LinkedList<>();
-
-					while(result.next()) {
-						Event temp = rowToEntity(result);
-						toret.add(temp);
+	public List<Event> search(String params) throws DAOException, IllegalArgumentException{
+		if (!params.isEmpty() && params != null) {
+			
+			try (final Connection conn = this.getConnection()) {
+				
+				List<Event> toret = new LinkedList<>();
+				Date now = new Date(System.currentTimeMillis());
+				final String query = "SELECT * FROM event WHERE title LIKE ?";
+				try (final PreparedStatement statement = conn.prepareStatement(query)) {
+					statement.setString(1, "%" + params + "%");
+					List<Event> events = new LinkedList<>();
+					try (final ResultSet result = statement.executeQuery()) {
+						
+						while(result.next()) {
+							
+							Event temp = rowToEntity(result);
+							
+							if(temp.getEvent_date().compareTo(now) > 0) {
+								events.add(temp);
+							}
+							
+						}
+						
+						toret.addAll(orderListbyDate(events));
+						
+						
+						
 					}
-					return toret;
 				}
+				
+				List<Event> copiaToret = toret;
+				final String query2 = "SELECT * FROM event WHERE description LIKE ?";
+				try (final PreparedStatement statement = conn.prepareStatement(query2)) {
+					statement.setString(1, "%" + params + "%");
+					List<Event> events = new LinkedList<>();
+					try (final ResultSet result = statement.executeQuery()) {
+						
+						while(result.next()) {
+							Event temp = rowToEntity(result);
+							
+							if(!copiaToret.contains(temp)) {
+								if(temp.getEvent_date().compareTo(now) > 0) {
+									events.add(temp);
+								}
+							}
+							
+						}
+						
+						toret.addAll(orderListbyDate(events));
+						return toret;
+						
+					}
+				}
+				
+				
+				
 			}
+			catch (SQLException e) {
+					
+				LOG.log(Level.SEVERE, "Error listing recent events", e);
+				throw new DAOException(e);
+			}	
+			
+		}else {
+			throw new IllegalArgumentException("Invalid argument in search");
 		}
-		catch (SQLException e) {
-			LOG.log(Level.SEVERE, "Error listing recent events", e);
-			throw new DAOException(e);
-		}
+	}
+	
+	
+	private List<Event> orderListbyDate(List<Event> events){
+		Collections.sort(events,new Comparator<Event>() {
+			
+
+			@Override
+			public int compare(Event e1, Event e2) {
+				return e1.getEvent_date().compareTo((e2.getEvent_date()));
+			}
+		});
+		
+		return events;
 	}
 	
 	

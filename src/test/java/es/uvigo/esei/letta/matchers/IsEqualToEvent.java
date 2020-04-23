@@ -39,4 +39,5 @@ public class IsEqualToEvent extends IsEqualToEntity<Event> {
 	public static Matcher<Iterable<? extends Event>> containsEventsInAnyOrder(Event ... Events) {
 		return containsEntityInAnyOrder(IsEqualToEvent::equalsToEvent, Events);
 	}
+
 }

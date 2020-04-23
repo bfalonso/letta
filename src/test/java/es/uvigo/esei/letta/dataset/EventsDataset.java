@@ -92,4 +92,6 @@ public class EventsDataset {
 	public static Event newEvent() {
 		return new Event(events().length + 1, newTitle(), newDescription(), newEvent_date(), newCreation_date(), newLocation(), newCategory(), newCapacity(), newNum_participants(), newDuration());
 	}
+	
+
 }
