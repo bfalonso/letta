@@ -19,6 +19,15 @@ public class EventsDataset {
 		};
 	}
 	
+	public static Event[] eventsSearch() {
+		return new Event[] {
+				new Event(3, "Title3", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
+				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
+				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
+		};
+	}
+	
 	public static Event[] eventsWithout(int ... ids) {
 		Arrays.sort(ids);
 		
