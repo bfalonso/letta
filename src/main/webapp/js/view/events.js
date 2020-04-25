@@ -130,7 +130,7 @@ var EventsView = (function() {
 						</div>\
 						<div class="col-lg-7 mr-0">\
 							<small class="text-muted float-right" id="event-participant">' + event.num_participants + ' \
-								people will be there</small>\
+								persona/s asistirán</small>\
 						</div>\
 					</div>\
 					<p>\
