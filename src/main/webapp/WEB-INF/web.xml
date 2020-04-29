@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   version="3.1">
-  <display-name>LETTA</display-name>
+  <display-name>letta</display-name>
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -31,31 +31,5 @@
     <url-pattern>/rest/*</url-pattern>
   </filter-mapping>
 
-  <security-constraint>
-    <web-resource-collection>
-      <web-resource-name>Protected Area</web-resource-name>
-      <url-pattern>/rest/*</url-pattern>
-      <http-method>PUT</http-method>
-      <http-method>DELETE</http-method>
-      <http-method>GET</http-method>
-      <http-method>POST</http-method>
-    </web-resource-collection>
-    <auth-constraint>
-      <role-name>ADMIN</role-name>
-      <role-name>USER</role-name>
-    </auth-constraint>
-  </security-constraint>
-
-  <!-- Security roles referenced by this web application -->
-  <security-role>
-    <role-name>ADMIN</role-name>
-  </security-role>
-  <security-role>
-    <role-name>USER</role-name>
-  </security-role>
-  
-  <login-config>
-    <auth-method>BASIC</auth-method>
-    <realm-name>LETTA</realm-name>
-  </login-config>
+ 
 </web-app>

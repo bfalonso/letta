@@ -1,0 +1,206 @@
+<html>
+<head>
+
+<meta name="description" content="The micro-hangouts network">
+<title>Let's Talk About</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+
+</head>
+
+<body>
+	<!--  class="navbar fixed-top navbar-light bg-light" -->
+
+	<nav class="navbar navbar-light bg-light">
+		<a id="logo" class="navbar-brand" href="#"> <img src="img/logo.svg"
+			height="20" alt="" />
+
+			<div class="row">
+				<form id="form-search" class="form-inline my-2 my-lg-0">
+					<input id="query" name="query" class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+					<a class="ml-5 mr-3 btn btn-primary" href="login.html">Iniciar sesión</a>
+				</form>
+			</div>
+	</nav>
+
+	<main role="admin">
+
+
+
+		<!-- INICIO CAROUSEL -->
+
+
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active bg-secondary">
+
+					<img class="d-block w-50 mx-auto d-block" src="img/internet.svg"
+						alt="First slide" id="event-category-carousel">
+					<div class="carousel-caption d-none d-md-block">
+						<h3 id="event-title-carousel"></h3>
+						<p id="event-description-carousel"></p>
+					</div>
+				</div>
+				<div class="carousel-item bg-secondary">
+
+					<img class="d-block w-50 mx-auto d-block" src="img/internet.svg"
+						alt="First slide" id="event-category-carousel">
+					<div class="carousel-caption d-none d-md-block">
+						<h3 id="event-title-carousel"></h3>
+						<p id="event-description-carousel"></p>
+					</div>
+				</div>
+				<div class="carousel-item bg-secondary">
+
+					<img class="d-block w-50 mx-auto d-block" src="img/internet.svg"
+						alt="First slide" id="event-category-carousel">
+					<div class="carousel-caption d-none d-md-block">
+						<h3 id="event-title-carousel"></h3>
+						<p id="event-description-carousel"></p>
+					</div>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+
+
+		<!-- INICIO LISTADO EVENTOS -->
+
+		<div class="container marketing">
+		</div>
+		<!-- FIN LISTADO EVENTOS -->
+
+
+
+
+
+	</main>
+
+	<footer class="container mt-5">
+        <p class="float-right"><a href="#carouselExampleIndicators">Back to top</a></p>
+        <p>© 2020-2021 SKUBA, Inc. · <a href="#">Privacidad</a> · <a href="#">Términos</a></p>
+      </footer>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="js/dao/events.js"></script>
+	<script type="text/javascript" src="js/view/events.js"></script>
+	<script type="text/javascript">
+	$(document).ready(
+		function() {
+ 
+			$('#form-search').submit(function(event) {
+				event.preventDefault();
+				var query = $('#query').val();
+				view.doSearch(query);
+			});
+			
+			
+			$('#logo').click(function(event) {
+				event.preventDefault();
+				view.init();
+			});
+
+			var view = new EventsView(new EventsDAO(),
+		    	'marketing'
+	    	);
+			
+			view.init();
+		});
+    </script>
+    
+    
+    
+    
+    <div class="modal eventDetailModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"></h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" onclick="$('.eventDetailModal').hide();">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+					<label><b>Descripción: </b></label>
+			     	<label id="eventDetailDescription"></label>
+			     	
+			     	<br/>
+			     	
+			     	<label><b>Ubicación: </b></label>
+			     	<label id="eventDetailLocation"></label>
+			     	
+			     	<br/>
+			     	
+			     	<label><b>Participantes: </b></label>
+			     	<label id="eventDetailNum_participants"></label>
+			     	<span>/</span>
+			     	<label id="eventDetailCapacity"></label>
+			     	
+			     	<br/>
+			     	
+			     	<label><b>Duración: </b></label>
+			     	<label id="eventDetailDuration"></label>
+					
+				</div>
+				<div class="modal-footer">
+				
+					<label><b>Fecha de creación: </b></label>
+			     	<label id="eventDetailCreation_date"></label>
+			     	
+			     	<br/>
+			     	
+			     	<label><b>Fecha del evento: </b></label>
+			     	<label id="eventDetailEvent_date"></label>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+  
+    
+    
+    
+    
+</body>
+
+</html>
