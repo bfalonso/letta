@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT dataset (event*)>
+<!ELEMENT dataset (event*, users*)>
 <!ELEMENT event EMPTY>
+<!ELEMENT users EMPTY>
 <!ATTLIST event
     id CDATA #IMPLIED
     title CDATA #IMPLIED
@@ -12,4 +13,8 @@
     capacity CDATA #IMPLIED
     num_participants CDATA #IMPLIED
     duration CDATA #IMPLIED
+>
+<!ATTLIST users
+    login CDATA #IMPLIED
+    password CDATA #IMPLIED
 >

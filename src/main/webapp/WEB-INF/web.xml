@@ -30,6 +30,11 @@
     <filter-name>CorsFilter</filter-name>
     <url-pattern>/rest/*</url-pattern>
   </filter-mapping>
+  
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>letta</realm-name>
+  </login-config>
 
  
 </web-app>

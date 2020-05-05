@@ -11,3 +11,8 @@ CREATE TABLE event (
     duration int NOT NULL,
 	PRIMARY KEY (id)
 );
+CREATE TABLE users (
+	login VARCHAR(100) NOT NULL,
+	password VARCHAR(64) NOT NULL,
+	PRIMARY KEY (login)
+);

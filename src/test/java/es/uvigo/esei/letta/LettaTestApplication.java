@@ -7,7 +7,7 @@ import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
 
-//import es.uvigo.esei.letta.filters.AuthorizationFilter;
+import es.uvigo.esei.letta.filters.AuthorizationFilter;
 
 @ApplicationPath("/rest/*")
 public class LettaTestApplication extends LettaApplication {
@@ -15,7 +15,7 @@ public class LettaTestApplication extends LettaApplication {
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> classes = new HashSet<>(super.getClasses());
 		
-		//classes.add(AuthorizationFilter.class);
+		classes.add(AuthorizationFilter.class);
 		
 		return unmodifiableSet(classes);
 	}
