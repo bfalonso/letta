@@ -54,16 +54,18 @@ var EventsView = (function() {
 							</div>\
 						</div>'
 				);
+				if(events.length > 0){
+						$.each(events, function(key, event) {
+						if(contRow % 3 == 0){
+							rowId = 'events-row-' + contRow;
+							rowQuery = '#' + rowId;
+							insertEventsRow($('.' + listContainerId));
+						}
+						contRow++;
+						appendToRow(event);
+					});
+				}
 				
-				$.each(events, function(key, event) {
-					if(contRow % 3 == 0){
-						rowId = 'events-row-' + contRow;
-						rowQuery = '#' + rowId;
-						insertEventsRow($('.' + listContainerId));
-					}
-					contRow++;
-					appendToRow(event);
-				});
 			},
 			function() {
 			    	alert('No hay ningún evento asociado a esta búsqueda.');
