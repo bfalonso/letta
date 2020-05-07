@@ -86,54 +86,70 @@ var EventsView = (function() {
 
 	var createEventRow = function(event, contRow) {
 		var description;
-		var image = "img/internet.svg";
+		var image = '<i class="fa fa-calendar-o" aria-hidden="true"></i>';
 		
-		if(event.description.length > 5){
-			description = event.description.substr(0, 30) + "...";
+		if(event.description.length > 200){
+			description = event.description.substr(0, 200) + "...";
 		}else{
-			description = event.description + ".";
+			description = event.description;
 		}
 		
 		switch(event.category){
 		case 'sports':
-			image = "img/sports.svg";
+			image = '<i class="fa fa-futbol-o" aria-hidden="true"></i>';
 			break;
 		case 'cinema':
-			image = "img/movie.svg";
+			image = '<i class="fa fa-film" aria-hidden="true"></i>';
 			break;
 		case 'theater':
-			image = "img/theater.svg";
+			image = '<i class="fa fa-ticket" aria-hidden="true"></i>';
 			break;
 		case 'music':
-			image = "img/music.svg";
+			image = '<i class="fa fa-music" aria-hidden="true"></i>';
 			break;
 		case 'literature':
-			image = "img/book.svg";
+			image = '<i class="fa fa-book" aria-hidden="true"></i>';
 			break;
 		case 'videogames':
-			image = "img/videogames.svg"
+			image = '<i class="fa fa-gamepad" aria-hidden="true"></i>';
 			break;
 		case 'series':
-			image = "img/tv.svg";
+			image = '<i class="fa fa-television" aria-hidden="true"></i>';
 			break;		
 		}
 		
-		return '<div class="col-lg-4">\
-					<img class="rounded-circle" src=' + image + '\
-						alt="Generic placeholder image" width="140" height="140"\
-						id="event-category">\
-					<h2 id="event-title">'+ event.title + '</h2>\
+		var text = "";
+		
+		if(event.num_participants == 0){
+			text = "No hay participantes";
+		}else if(event.num_participants == 1){
+			text = "1 persona asistirá";
+		}else{
+			text = event.num_participants + " personas asistirán";
+		}
+		
+		var fecha = event.event_date.split("-");
+		
+		return '<div class="col-lg-4" style="margin-top: 32px">\
+					<div class="row">\
+					<div class="col-1" style="font-size: xx-large">\
+						' + image + '\
+					</div>\
+					<label>  </label>\
+					<div class="col-11">\
+						<h3 id="event-title">'+ event.title + '</h3>\
+					</div>\
+					</div>\
 					<p id="event-description">' + description + '.</p>\
 					<div class="row-lg-1">\
 						<small class="text-muted" id="event-location"> ' + event.location + '</small>\
 					</div>\
 					<div class="row">\
 						<div class="col-lg-5">\
-							<small class="text-muted" id="event-hour">' + event.event_date + '</small>\
+							<small class="text-muted" id="event-hour">' + fecha[2]+"/"+fecha[1]+"/"+fecha[0] + '</small>\
 						</div>\
 						<div class="col-lg-7 mr-0">\
-							<small class="text-muted float-right" id="event-participant">' + event.num_participants + ' \
-								persona/s asistirán</small>\
+							<small class="text-muted float-right" id="event-participant">' +  text + '</small>\
 						</div>\
 					</div>\
 					<p>\
