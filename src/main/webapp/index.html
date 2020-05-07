@@ -12,6 +12,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css%22%3E>
 
 </head>
 
@@ -25,7 +26,7 @@
 			<div class="row">
 				<form id="form-search" class="form-inline my-2 my-lg-0">
 					<input id="query" name="query" class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search">
+						placeholder="Buscar" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 					<a class="ml-5 mr-3 btn btn-primary" href="login.html">Iniciar sesión</a>
 				</form>
@@ -150,10 +151,10 @@
     
     
     <div class="modal eventDetailModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title"></h5>
+					<h5 class="modal-title" style="font-size:xx-large"></h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" onclick="$('.eventDetailModal').hide();">
 						<span aria-hidden="true">&times;</span>
@@ -161,36 +162,59 @@
 				</div>
 				<div class="modal-body">
 				
-					<label><b>Descripción: </b></label>
-			     	<label id="eventDetailDescription"></label>
+					<br>
+			     	<i><label id="eventDetailDescription" style="font-size:large"></label></i>
+			     	<br><br><br>
 			     	
-			     	<br/>
+			     	<div class="row">
 			     	
-			     	<label><b>Ubicación: </b></label>
-			     	<label id="eventDetailLocation"></label>
+			     		<div class="col">
+			     			<i class="fa fa-map-marker" aria-hidden="true" style="font-size:x-large"></i>
+			     			<label> </label>
+			     			<label id="eventDetailLocation"></label>
+			     		</div>
+			     		
+			     		<div class="col">
+			     			<i class="fa fa-calendar" aria-hidden="true" style="font-size:x-large"></i>
+			     			<label> </label>
+			     			<label id="eventDetailEvent_date"></label>
+			     		</div>
+			     		
+			     		<div class="col">
+			     			<i class="fa fa-users" aria-hidden="true" style="font-size:x-large"></i>
+			     			<label> </label>
+			     			<label id="eventDetailNum_participants"></label>
+			     			<span>/</span>
+			     			<label id="eventDetailCapacity"></label>
+			     		</div>
+			     		
+			     		<div class="col">
+			     			<i class="fa fa-clock-o" aria-hidden="true" style="font-size:x-large"></i>
+			     			<label> </label>
+			     			<label id="eventDetailDuration"></label>
+			     			<label> minutos</label>
+			     		</div>
 			     	
-			     	<br/>
+			     	</div>
 			     	
-			     	<label><b>Participantes: </b></label>
-			     	<label id="eventDetailNum_participants"></label>
-			     	<span>/</span>
-			     	<label id="eventDetailCapacity"></label>
-			     	
-			     	<br/>
-			     	
-			     	<label><b>Duración: </b></label>
-			     	<label id="eventDetailDuration"></label>
 					
 				</div>
-				<div class="modal-footer">
-				
-					<label><b>Fecha de creación: </b></label>
-			     	<label id="eventDetailCreation_date"></label>
-			     	
-			     	<br/>
-			     	
-			     	<label><b>Fecha del evento: </b></label>
-			     	<label id="eventDetailEvent_date"></label>
+				<div class="modal-footer" style="display:block">
+					<div class="row">
+						<div class="col-5">
+			     			<button id="previous" style="border: none; background-color: white">
+			     				<i class="fa fa-chevron-left" aria-hidden="true" style="font-size:xxx-large; color: #007bff"></i>
+			     			</button>
+			     		</div>
+			     		<div class="col-6">
+							<a class="btn btn-primary" href="#">Inscribirse</a>
+			     		</div>
+			     		<div class="col-1">
+			     			<button id="next" style="border: none; background-color: white">
+			     				<i class="fa fa-chevron-right" aria-hidden="true" style="font-size:xxx-large; color: #007bff"></i>
+			     			</button>
+			     		</div>
+					</div>
 					
 				</div>
 			</div>

@@ -1,10 +1,10 @@
 var dao;
+var eventos = [];
 
 var EventsView = (function() {
 	
 	// Referencia a this que permite acceder a las funciones públicas desde las funciones de jQuery.
 	var self;
-
 	var contRow = 0;
 	var rowId = 'events-row-' + contRow;
 	var rowQuery = '#' + rowId;
@@ -24,8 +24,9 @@ var EventsView = (function() {
 						rowQuery = '#' + rowId;
 						insertEventsRow($('.' + listContainerId));
 					}
+					eventos[contRow] = event.id;
+					appendToRow(event, contRow);
 					contRow++;
-					appendToRow(event);
 				});
 			},
 			function() {
@@ -81,7 +82,7 @@ var EventsView = (function() {
 	
 	
 
-	var createEventRow = function(event) {
+	var createEventRow = function(event, contRow) {
 		var description;
 		var image = "img/internet.svg";
 		
@@ -134,7 +135,7 @@ var EventsView = (function() {
 						</div>\
 					</div>\
 					<p>\
-						<button class="btn btn-secondary mt-2" role="button"  onclick="eventDetailView(' + event.id + ');" >Ver\
+						<button class="btn btn-secondary mt-2" role="button"  onclick="eventDetailView('+ contRow +');" >Ver\
 							detalles</button>\
 					</p>\
 		</div>';
@@ -144,9 +145,9 @@ var EventsView = (function() {
 		alert(textStatus + ": " + error);
 	};
 
-	var appendToRow = function(event) {
+	var appendToRow = function(event, contRow) {
 		$(rowQuery)
-			.append(createEventRow(event));
+			.append(createEventRow(event, contRow));
 	};
 	
 	return EventsView;
@@ -154,33 +155,49 @@ var EventsView = (function() {
 })();
 
 
-var eventDetailView = function (idEvent) {
+var eventDetailView = function (index) {
 	
-	dao.get(idEvent,
+	dao.get(eventos[index],
 			function (event){
-				
 				$(".modal-title").text(event.title);
 				$("#eventDetailDescription").text(event.description);
 				$("#eventDetailLocation").text(event.location);
 				$("#eventDetailNum_participants").text(event.num_participants);
 				$("#eventDetailCapacity").text(event.capacity);
 				$("#eventDetailDuration").text(event.duration);
-
-				$("#eventDetailCreation_date").text(event.creation_date);
-				$("#eventDetailEvent_date").text(event.event_date);
-				
-		
-				$(".eventDetailModal").show();
-		
+				var fecha = event.event_date.split("-");
+				$("#eventDetailEvent_date").text(fecha[2]+"/"+fecha[1]+"/"+fecha[0]);
 			},
 			function() {
 		    	alert('No ha sido posible acceder al evento.');
 			}		
 	);
 	
+	$("#previous").unbind();
+	$("#next").unbind();
+	$("#previous").hide();
+	$("#next").hide();
 	
-};
+	if (index == 0){
+		$("#next").click(function(){eventDetailView(index + 1);});
+		$("#next").show();
+		
+	}
+	else if (index == eventos.length - 1){
+		$("#previous").click(function(){eventDetailView(index - 1);});
+		$("#previous").show();
+		
+	}		
+	else{
+		$("#next").click(function(){eventDetailView(index + 1);});
+		$("#previous").click(function(){eventDetailView(index - 1);});
+		$("#previous").show();
+		$("#next").show();
+		
+	}
 
+	$(".eventDetailModal").show();
+};
 
 
 
