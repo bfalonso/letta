@@ -1,5 +1,6 @@
 CREATE DATABASE `letta`;
 
+
 CREATE TABLE `letta`.`event` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`title` varchar(20) NOT NULL,
@@ -17,6 +18,7 @@ CREATE TABLE `letta`.`event` (
 CREATE TABLE `letta`.`users` (
 	`login` varchar(100) NOT NULL,
 	`password` varchar(64) NOT NULL,
+	`role` varchar(4) NOT NULL DEFAULT 'USER',
 	PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

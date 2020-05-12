@@ -143,7 +143,7 @@ var EventsView = (function() {
 						' + image + '\
 					</div>\
 					<label>  </label>\
-					<div class="col-11">\
+					<div class="col-10 ml-2">\
 						<h3 id="event-title">'+ event.title + '</h3>\
 					</div>\
 					</div>\

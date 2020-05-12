@@ -18,9 +18,9 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Let's Talk About</h5>
-            <form class="form-signin">
+            <form class="form-signin" id="form-signin">
               <div class="form-label-group">
-                <input type="text" id="user" class="form-control" placeholder="Usuario" required>
+                <input type="text" id="login" class="form-control" placeholder="Usuario" required>
               </div>
 
               <div class="form-label-group">
@@ -41,5 +41,19 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js">
 	</script>
+	<script type="text/javascript" src="js/login.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#form-signin').submit(function(event) {
+		event.preventDefault();
+
+		var login = $('#login').val();
+		var password = $('#password').val();
+
+		doLogin(login, password);
+	    });
+	});
+    </script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package es.uvigo.esei.letta.rest;
 
 import static es.uvigo.esei.letta.dataset.EventsDataset.existentId;
+import static es.uvigo.esei.letta.dataset.UsersDataset.normalLogin;
+import static es.uvigo.esei.letta.dataset.UsersDataset.userToken;
 import static es.uvigo.esei.letta.dataset.EventsDataset.existentEvent;
 import static es.uvigo.esei.letta.dataset.EventsDataset.newTitle;
 import static es.uvigo.esei.letta.dataset.EventsDataset.newDescription;
@@ -93,8 +95,9 @@ public class EventsResourceTest extends JerseyTest{
 	@Test
 	public void testList() throws IOException {
 
-		final Response response = target("events/recent/").request().get();
-		assertThat(response, hasOkStatus());
+		final Response response = target("events/recent/").request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
+			.get();
 
 		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
 		
@@ -105,7 +108,9 @@ public class EventsResourceTest extends JerseyTest{
 	// Test: Un usuario no registrado solo podrá ver cierta información [category title description capacity]
 	@Test
 	public void testGetValidId() throws IOException {
-		final Response response = target("events/" + existentId()).request().get();
+		final Response response = target("events/" + existentId()).request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
+				.get();
 		
 		assertThat(response, hasOkStatus());
 		final Event event = response.readEntity(Event.class);
@@ -114,7 +119,9 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testGetInvalidId() throws IOException {
-		final Response response = target("events/" + nonExistentId()).request().get();
+		final Response response = target("events/" + nonExistentId()).request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
+				.get();
 
 		assertThat(response, hasBadRequestStatus());
 	}
@@ -124,6 +131,7 @@ public class EventsResourceTest extends JerseyTest{
 	@Test
 	public void testListSearchTitle() throws IOException {
 		final Response response = target("events").queryParam("search", "Title6").request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
 
@@ -135,6 +143,7 @@ public class EventsResourceTest extends JerseyTest{
 	@Test
 	public void testListSearchDescription() throws IOException {
 		final Response response = target("events").queryParam("search", "Description6").request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
 
@@ -146,6 +155,7 @@ public class EventsResourceTest extends JerseyTest{
 	@Test
 	public void testListSearchdescriptionOrdered() throws IOException {
 		final Response response = target("events").queryParam("search", "Description").request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
 

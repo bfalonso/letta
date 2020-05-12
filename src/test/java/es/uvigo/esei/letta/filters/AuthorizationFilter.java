@@ -51,7 +51,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 				try {
 					if (this.dao.checkLogin(userPass[0], userPass[1])) {
 						final User user = this.dao.get(userPass[0]);
-							requestContext.setSecurityContext(new UserSecurityContext(user));
+						requestContext.setSecurityContext(new UserSecurityContext(user));
 					} else {
 						requestContext.abortWith(createResponse());
 					}
@@ -62,6 +62,16 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 				requestContext.abortWith(createResponse());
 			}
 		}
+	}
+	
+	private static boolean isUsersPath(ContainerRequestContext context) {
+		final List<PathSegment> pathSegments = context.getUriInfo().getPathSegments();
+		return !pathSegments.isEmpty() && pathSegments.get(0).getPath().equals("users");
+	}
+	
+	private static boolean isEventsRecentPath(ContainerRequestContext context) {
+		final List<PathSegment> pathSegments = context.getUriInfo().getPathSegments();
+		return !pathSegments.isEmpty() && pathSegments.get(0).getPath().equals("events/recent");
 	}
 	
 	private static Response createResponse() {
@@ -80,7 +90,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
 		@Override
 		public boolean isUserInRole(String role) {
-			return false;
+			return true;
 		}
 
 		@Override

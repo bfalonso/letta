@@ -87,6 +87,7 @@ public class UsersResourceTest extends JerseyTest {
 		
 		assertThat(response, hasUnauthorized());
 	}
+	
 	@Test
 	public void testGetBadCredentials() throws IOException {
 		final Response response = target("users/" + normalLogin()).request()
