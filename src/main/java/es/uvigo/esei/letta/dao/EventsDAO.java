@@ -77,7 +77,15 @@ public class EventsDAO extends DAO {
 
 	}
 
-	public List<Event> search(String params) throws DAOException, IllegalArgumentException {
+	public List<Event> search(String params) throws DAOException, IllegalArgumentException, IndexOutOfBoundsException, Exception {
+		/**
+		 * paginated_by = 6
+		 * toret.lenght / paginated_by = numero paginas
+		 * 
+		 * base_limit = (numPagina - 1) * paginated_by
+		 * upper_limit = (numPagina * paginated_by) - 1
+		 * 
+		 */
 		if (!params.isEmpty() && params != null) {
 
 			List<Event> toret = new LinkedList<>();
@@ -125,6 +133,7 @@ public class EventsDAO extends DAO {
 				}
 
 				toret.addAll(orderListbyDate(events2));
+				
 				return toret;
 
 			} catch (SQLException e) {
@@ -137,7 +146,7 @@ public class EventsDAO extends DAO {
 			throw new IllegalArgumentException("Invalid argument in search");
 		}
 	}
-
+	
 	private ResultSet executeQuery(String query, String params) throws SQLException {
 
 		Connection conn = this.getConnection();

@@ -40,7 +40,14 @@ var EventsView = (function() {
 			contRow = 0;
 			$('.' + listContainerId).html("");
 			$('#carouselExampleIndicators').hide();
-			dao.searchEvents(query, function(events) {
+			dao.searchEvents(query, function(response) {
+				/**
+				Response is an object array (Object[])
+				First element of the array refers to the pagianted events
+				Second element refers to total pages for that query
+				*/
+				events = response[0]
+				totalPages = response[1]	
 				if(events.length == 0){
 					var mensaje = "No hay resultados para tu búsqueda:"
 				}else{

@@ -41,7 +41,7 @@ var EventsDAO = (function () {
     this.searchEvents = function (query, done, fail, always) {
       requestByAjax(
         {
-          url: resourcePath + "?search=" + query,
+          url: resourcePath + "?search=" + query + "&page=1",
           type: "GET",
         },
         done,
