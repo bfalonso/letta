@@ -16,10 +16,10 @@ var EventsDAO = (function () {
   };
 
   function EventsDAO() {
-    this.listRecentEvents = function (done, fail, always) {
+    this.listRecentEvents = function (page, done, fail, always) {
       requestByAjax(
         {
-          url: resourcePath + "recent",
+          url: resourcePath + "recent" + "?page=" + page,
           type: "GET",
         },
         done,

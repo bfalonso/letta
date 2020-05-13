@@ -142,7 +142,7 @@
 			
 			$('#logo').click(function(event) {
 				event.preventDefault();
-				view.init();
+				view.init(0);
 			});
 
 			var view = new EventsView(new EventsDAO(),
@@ -156,7 +156,7 @@
 			});
 
 			
-			view.init();
+			view.init(0);
 		});
 	
 		function searchCall(query, page){
@@ -166,6 +166,16 @@
 		    	);
 			
 			view.doSearch(query, page);
+			
+		}
+		
+		function listRecent(page){
+			var view = new EventsView(new EventsDAO(),
+			    	'marketing',
+			    	'pagination'
+		    	);
+			
+			view.init(page);
 			
 		}
     </script>

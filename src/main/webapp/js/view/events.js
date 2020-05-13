@@ -13,12 +13,14 @@ var EventsView = (function() {
 		dao = eventsDao;
 		self = this;
 		
-		this.init = function() {
+		this.init = function(page) {
+			$('.' + paginationContainerId).html("");
 			contRow = 0;
 			$('.' + listContainerId).html("");
 			$('#carouselExampleIndicators').show();
-			dao.listRecentEvents(function(events) {
-				$.each(events, function(key, event) {
+			dao.listRecentEvents(page, function(events) {
+				totalPages = events[1];
+				$.each(events[0], function(key, event) {
 					if(contRow % 3 == 0){
 						rowId = 'events-row-' + contRow;
 						rowQuery = '#' + rowId;
@@ -28,6 +30,21 @@ var EventsView = (function() {
 					appendToRow(event, contRow);
 					contRow++;
 				});
+				if(totalPages > 0) {
+					
+					var htmlPages = "";
+					for(var i = 0; i < totalPages; i++){
+						
+						htmlPages += '<li class="page-item"><a class="page-link" onclick="return listRecent(' + i + ');" href="#">' + (i + 1) + '</a></li>';
+					}
+					
+					$('.' + paginationContainerId).append(
+						'<nav aria-label="Page navigation example">\
+							<ul class="pagination">' +
+							htmlPages +
+							'</ul></nav>'
+					);
+				}
 			},
 			function() {
 			    	alert('No ha sido posible acceder al listado de eventos recientes.');
@@ -42,23 +59,19 @@ var EventsView = (function() {
 			$('.' + paginationContainerId).html("");
 			$('#carouselExampleIndicators').hide();
 			dao.searchEvents(query, page, function(response) {
-				/**
-				Response is an object array (Object[])
-				First element of the array refers to the pagianted events
-				Second element refers to total pages for that query
-				*/
-				events = response[0]
-				totalPages = response[1]	
+				events = response[0];
+				totalPages = response[1];	
 				if(events.length == 0){
-					var mensaje = "No hay resultados para tu búsqueda:"
+					var mensaje = "No hay resultados para tu búsqueda:";
 				}else{
-					var mensaje = "Los resultados de tu búsqueda:"
+					var mensaje = "Los resultados de tu búsqueda:";
 				}
 				$('.' + listContainerId).append(
 						'<div class="section mt-3">\
 							<div class="col-md-12">\
-							<h4>' + mensaje + '</h4>\
-							<p>"' + query + '"</p>\
+								<div class="row">\
+									<h4>' + mensaje + '&nbsp;&nbsp;"' + query + '"</h4>\
+								</div>\
 							</div>\
 						</div>'
 				);
@@ -73,7 +86,6 @@ var EventsView = (function() {
 						appendToRow(event);
 					});
 					
-					// Ads pagination
 					if(totalPages > 0) {
 						
 						var htmlPages = "";
