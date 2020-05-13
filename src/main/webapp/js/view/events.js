@@ -9,7 +9,7 @@ var EventsView = (function() {
 	var rowId = 'events-row-' + contRow;
 	var rowQuery = '#' + rowId;
 	
-	function EventsView(eventsDao, listContainerId) {
+	function EventsView(eventsDao, listContainerId, paginationContainerId) {
 		dao = eventsDao;
 		self = this;
 		
@@ -36,11 +36,12 @@ var EventsView = (function() {
 
 		};
 		
-		this.doSearch = function(query) {
+		this.doSearch = function(query, page) {
 			contRow = 0;
 			$('.' + listContainerId).html("");
+			$('.' + paginationContainerId).html("");
 			$('#carouselExampleIndicators').hide();
-			dao.searchEvents(query, function(response) {
+			dao.searchEvents(query, page, function(response) {
 				/**
 				Response is an object array (Object[])
 				First element of the array refers to the pagianted events
@@ -62,7 +63,7 @@ var EventsView = (function() {
 						</div>'
 				);
 				if(events.length > 0){
-						$.each(events, function(key, event) {
+					$.each(events, function(key, event) {
 						if(contRow % 3 == 0){
 							rowId = 'events-row-' + contRow;
 							rowQuery = '#' + rowId;
@@ -71,6 +72,25 @@ var EventsView = (function() {
 						contRow++;
 						appendToRow(event);
 					});
+					
+					// Ads pagination
+					if(totalPages > 0) {
+						
+						var htmlPages = "";
+						var queryString = "'" + new String(query) + "'";
+						for(var i = 0; i < totalPages; i++){
+							
+							htmlPages += '<li class="page-item"><a class="page-link" onclick="return searchCall(' + queryString + ', ' + i + ');" href="#">' + (i + 1) + '</a></li>';
+						}
+						
+						$('.' + paginationContainerId).append(
+							'<nav aria-label="Page navigation example">\
+								<ul class="pagination">' +
+								htmlPages +
+								'</ul></nav>'
+						);
+					}
+					
 				}
 				
 			},

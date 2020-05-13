@@ -165,5 +165,14 @@ public class EventsResourceTest extends JerseyTest{
 		assertEquals(events, eventOrdered);
 	}
 	
+	@Test
+	public void testListSearchPaginated() throws IOException{
+		final Response response = target("events/search/?page=1").request().get();
+		assertThat(response, hasOkStatus());
+		
+		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
+	}
+	
 	
 }

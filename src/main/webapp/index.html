@@ -96,6 +96,10 @@
 		</div>
 		<!-- FIN LISTADO EVENTOS -->
 
+		<!-- INICIO PAGINACIÓN -->
+		<div class="container pagination">
+		</div>
+		<!-- FIN PAGINACIÓN -->
 
 
 
@@ -132,7 +136,7 @@
 			$('#form-search').submit(function(event) {
 				event.preventDefault();
 				var query = $('#query').val();
-				view.doSearch(query);
+				view.doSearch(query, 0);
 			});
 			
 			
@@ -142,7 +146,8 @@
 			});
 
 			var view = new EventsView(new EventsDAO(),
-		    	'marketing'
+		    	'marketing',
+		    	'pagination'
 	    	);
 			
 			$('#crear').click(function(event) {
@@ -153,6 +158,16 @@
 			
 			view.init();
 		});
+	
+		function searchCall(query, page){
+			var view = new EventsView(new EventsDAO(),
+			    	'marketing',
+			    	'pagination'
+		    	);
+			
+			view.doSearch(query, page);
+			
+		}
     </script>
     
     

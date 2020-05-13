@@ -38,10 +38,10 @@ var EventsDAO = (function () {
         always
       );
     };
-    this.searchEvents = function (query, done, fail, always) {
+    this.searchEvents = function (query, page, done, fail, always) {
       requestByAjax(
         {
-          url: resourcePath + "?search=" + query + "&page=1",
+          url: resourcePath + "?search=" + query + "&page=" + page,
           type: "GET",
         },
         done,
