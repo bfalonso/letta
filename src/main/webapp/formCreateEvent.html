@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Let´s Talk About - Crear evento</title>
+
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Crear evento</h5>
+            <form class="form-signin" id="form-signin">
+              <div class="form-label-group">
+             
+                		<input type="text" id="title" name="title" class="form-control"  placeholder="&#xf031  Título" required maxlength="20">
+             		</div>
+		            
+		            <div class="form-label-group">
+		                <input type="text" id="event_date" name="event_date" class="form-control" 
+                    	onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="&#xf073  Fecha evento">
+		            </div>
+		            
+		            <div class="form-label-group">
+		                <input type="text" id="location" name="location" class="form-control" placeholder="&#xf041  Ubicación">
+		            </div>
+		            
+		            <div class="form-label-group">
+		                <input type="text" id="capacity" name="capacity" class="form-control" placeholder="&#xf007  Capacidad">
+		            </div>
+		            
+		            <div class="form-label-group">
+		                <input type="number" id="duration" name="duration" class="form-control" placeholder="&#xf017  Duración">
+		            </div>
+		            
+		            <div class="form-label-group">
+		            <select name="category" id="category" class="form-control" style="border-radius: 2em;height: auto;padding: var(--input-padding-y) var(--input-padding-x);font-family: FontAwesome;color: #717171;">
+  					<option value="" disabled selected>&#xf02b Categoría</option>
+  					<option value="sports">Deporte</option> 
+  					<option value="cinema">Cine</option>
+  					<option value="theater">Teatro</option>
+  					<option value="music">Música</option>
+  					<option value="literature">Literatura</option>
+  					<option value="videogames">Videojuegos</option>
+  					<option value="series">Series</option>
+  					<option value="other">Otro</option>
+					</select>
+					</div>
+		            
+		            		
+		            <div class="form-label-group">
+		                <textarea id="description" name="description" maxlength="5000" class="form-control" placeholder="&#xf044  Descripción" style="border-radius: 2em;height: auto;padding: var(--input-padding-y) var(--input-padding-x); "></textarea>
+		            </div>
+              
+              		<div class="text-center">
+              		<button class="btn btn-sm btn-primary text-uppercase" type="submit">Cancelar</button>
+              		<button class="btn btn-sm btn-primary text-uppercase" type="submit">Crear</button>
+              		</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-2.2.4.min.js">
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js">
+	</script>
+	<script type="text/javascript" src="js/login.js"></script>
+	
+	<script type="text/javascript">
+
+    </script>
+</body>
+</html>
