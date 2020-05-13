@@ -30,6 +30,19 @@ public class EventsDataset {
 		};
 	}
 	
+	public static Event[] eventsRecent() {
+		return new Event[] {
+				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(7, "Title7", "Description7", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(8, "Title8", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(11, "Title11", "Description10", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(12, "Title12", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(15, "Title15", "Description15", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(16, "Title16", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
+		};
+	}
+	
 	public static Event[] eventsPagination() {
 		return new Event[] {
 				new Event(1, "Title1" ,"Description1" ,new Date(1570658400000L) ,new Date(1570658400000L) ,"Ourense" ,"cinema" ,20 ,15 ,5 ),

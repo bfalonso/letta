@@ -13,6 +13,7 @@ import static es.uvigo.esei.letta.dataset.EventsDataset.newCapacity;
 import static es.uvigo.esei.letta.dataset.EventsDataset.newNum_participants;
 import static es.uvigo.esei.letta.dataset.EventsDataset.nonExistentId;
 import static es.uvigo.esei.letta.dataset.EventsDataset.events;
+import static es.uvigo.esei.letta.dataset.EventsDataset.eventsRecent;
 import static es.uvigo.esei.letta.matchers.HasHttpStatus.hasBadRequestStatus;
 import static es.uvigo.esei.letta.matchers.HasHttpStatus.hasOkStatus;
 import static es.uvigo.esei.letta.matchers.HasHttpStatus.hasUnauthorized;
@@ -26,6 +27,7 @@ import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -98,14 +100,35 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testList() throws IOException {
-
-		final Response response = target("events/recent/").request()
-				.header("Authorization", "Basic " + userToken(normalLogin()))
-			.get();
-
-		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		ObjectMapper mapper = new ObjectMapper();
+		int page = 0;
+		boolean morePages = true;
+		List<Event> events = new ArrayList<Event>();
 		
-		assertThat(events, containsEventsInAnyOrder(events()));
+		while(morePages) {
+			final Response response = target("events/recent").queryParam("page", page).request()
+					.header("Authorization", "Basic " + userToken(normalLogin()))
+				.get();
+			
+			final Object[] eventsPage = response.readEntity(new GenericType<Object[]>(){});
+			List<Event> arrayEvents = (List<Event>)eventsPage[0];
+					
+			if (arrayEvents.size() == 0) {
+				morePages = false;
+			}
+			else {
+				page++;
+				for(int i = 0; i < arrayEvents.size(); i++) {
+					events.add(mapper.convertValue(
+							arrayEvents.get(i), 
+						    Event.class
+						));
+				}
+			}
+			
+		}
+		
+		assertThat(events, containsEventsInAnyOrder(eventsRecent()));
 	}
 
 	// Hace falta implementar los tests que soporten el sistema de login.
