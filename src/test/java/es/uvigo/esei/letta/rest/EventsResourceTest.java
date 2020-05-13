@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 import javax.ws.rs.client.Entity;
@@ -193,7 +194,7 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testListSearchdescriptionOrdered() throws IOException {
-		final Response response = target("events").queryParam("search", "Description").queryParam("page", 0).request()
+		final Response response = target("events").queryParam("search", "Description").queryParam("page", "0").request()
 				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
@@ -212,20 +213,34 @@ public class EventsResourceTest extends JerseyTest{
 		}
 		
 		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
-		System.out.println(finalEvents);
-		System.out.println(eventOrdered);
-		assertEquals(finalEvents, eventOrdered);
-	}
-	
-	/*
-	@Test
-	public void testListSearchPaginated() throws IOException{
-		final Response response = target("events/search/?page=1").request().get();
-		assertThat(response, hasOkStatus());
 		
-		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
-		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
+		assertEquals(finalEvents, eventOrdered.subList(0, 6));
 	}
-	
-	*/
+	/*
+	@Test 
+	public void testListSearchdescription2() throws IOException{
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		final Response response2 = target("events").queryParam("search", "Description").queryParam("page", "1").request()
+				.header("Authorization", "Basic " + userToken(normalLogin()))
+		.get();
+		assertThat(response2, hasOkStatus());
+		final Object[] objectArray2 = response2.readEntity(new GenericType<Object[]>(){});
+		final List<Event> events2 = (List<Event>) objectArray2[0];
+		Iterator<Event> it2 = events2.iterator();
+		final List<Event> finalEvents2 = new LinkedList<Event>();
+		while(it2.hasNext()) {
+			 
+			final Event parsedEvent =  mapper.convertValue(
+				it2.next(), 
+				Event.class
+			);
+			finalEvents2.add(parsedEvent);
+		}
+		
+		final List<Event> eventOrdered2 = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
+		assertEquals(finalEvents2, eventOrdered2.subList(6, 12));
+	}*/
+
 }
