@@ -89,7 +89,7 @@ public class EventsResource {
 		try {
 			List<Event> totalEvents = this.dao.search(params);
 			int totalPages =  (int) Math.ceil((double) totalEvents.size() / 6.0);
-			List<Event> pageEvents =  pagination(totalEvents, (page - 1) * 6);
+			List<Event> pageEvents =  pagination(totalEvents, page * 6);
 			Object[] toret = {pageEvents, totalPages};
 			return Response.ok(toret).build();
 		}
@@ -119,8 +119,6 @@ public class EventsResource {
 			}
 		
 		}
-		
-		
 		return toret;
 	}
 }
