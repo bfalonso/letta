@@ -22,9 +22,11 @@ public class EventsDataset {
 	public static Event[] eventsSearch() {
 		return new Event[] {
 				new Event(3, "Title3", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
+				new Event(9, "Title9", "Description9", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
+				new Event(13, "Title13", "Description13", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
 				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
-				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
-				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
+				new Event(10, "Title10", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
+				new Event(14, "Title14", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5)
 		};
 	}
 	
@@ -36,15 +38,15 @@ public class EventsDataset {
 				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
 				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
 				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
-				new Event(7, "Title7", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(7, "Title7", "Description66", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
 				new Event(8, "Title8", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
 				new Event(9, "Title9", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
 				new Event(10, "Title10", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
-				new Event(11, "Title11", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(11, "Title11", "Description666", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
 				new Event(12, "Title12", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
 				new Event(13, "Title13", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
 				new Event(14, "Title14", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
-				new Event(15, "Title15", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(15, "Title15", "Description6666", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
 				new Event(16, "Title16", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
 		};
 	}

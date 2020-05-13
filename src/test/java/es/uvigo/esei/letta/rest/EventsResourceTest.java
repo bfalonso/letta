@@ -27,6 +27,8 @@ import static org.junit.Assert.assertThat;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,6 +48,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -130,14 +134,20 @@ public class EventsResourceTest extends JerseyTest{
 	
 	@Test
 	public void testListSearchTitle() throws IOException {
-		final Response response = target("events").queryParam("search", "Title6").request()
+		final Response response = target("events").queryParam("search", "Title6").queryParam("page", 0).request()
 				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
+		ObjectMapper mapper = new ObjectMapper();
 
-		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		final Object[] objectArray = response.readEntity(new GenericType<Object[]>(){});
+		final List<Event> events = (List<Event>) objectArray[0];
 		final Event event = EventsDataset.event(6);
-		assertEquals(events.get(0), event);
+		final Event expectedEvent =  mapper.convertValue(
+				events.get(0), 
+			    Event.class
+			); 
+		assertEquals(expectedEvent, event);
 	}
 	
 	@Test
@@ -146,25 +156,45 @@ public class EventsResourceTest extends JerseyTest{
 				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
-
-		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
+		
+		ObjectMapper mapper = new ObjectMapper();
+		final Object[] objectArray = response.readEntity(new GenericType<Object[]>(){});
+		final List<Event> events = (List<Event>) objectArray[0];
+		final Event expectedEvent =  mapper.convertValue(
+				events.get(0), 
+			    Event.class
+			);
 		final Event event = EventsDataset.event(6);
-		assertEquals(events.get(0), event);
+		assertEquals(expectedEvent, event);
 	}
 	
 	@Test
 	public void testListSearchdescriptionOrdered() throws IOException {
-		final Response response = target("events").queryParam("search", "Description").request()
+		final Response response = target("events").queryParam("search", "Description").queryParam("page", 0).request()
 				.header("Authorization", "Basic " + userToken(normalLogin()))
 		.get();
 		assertThat(response, hasOkStatus());
-
-		final List<Event> events = response.readEntity(new GenericType<List<Event>>(){});
-		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
+		ObjectMapper mapper = new ObjectMapper();
+		final Object[] objectArray = response.readEntity(new GenericType<Object[]>(){});
+		final List<Event> events = (List<Event>) objectArray[0];
+		Iterator<Event> it = events.iterator();
+		final List<Event> finalEvents = new LinkedList<Event>();
+		while(it.hasNext()) {
+			 
+			final Event parsedEvent =  mapper.convertValue(
+				it.next(), 
+				Event.class
+			);
+			finalEvents.add(parsedEvent);
+		}
 		
-		assertEquals(events, eventOrdered);
+		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
+		System.out.println(finalEvents);
+		System.out.println(eventOrdered);
+		assertEquals(finalEvents, eventOrdered);
 	}
 	
+	/*
 	@Test
 	public void testListSearchPaginated() throws IOException{
 		final Response response = target("events/search/?page=1").request().get();
@@ -174,5 +204,5 @@ public class EventsResourceTest extends JerseyTest{
 		final List<Event> eventOrdered = new LinkedList<Event>(Arrays.asList(EventsDataset.eventsSearch()));
 	}
 	
-	
+	*/
 }
