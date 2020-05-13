@@ -73,11 +73,19 @@ public class EventsResource {
 	
 	@GET
 	@Path("/recent")
-	public Response listRecent() {
+	public Response listRecent(@QueryParam("page") int page) {
 		try {
-			return Response.ok(this.dao.listRecent()).build();
-		} catch (DAOException e) {
-			LOG.log(Level.SEVERE, "Error listing events", e);
+			List<Event> totalEvents = this.dao.listRecent();
+			int totalPages =  (int) Math.ceil((double) totalEvents.size() / 6.0);
+			List<Event> pageEvents =  pagination(totalEvents, page * 6);
+			Object[] toret = {pageEvents, totalPages};
+			return Response.ok(toret).build();
+		}
+		catch (DAOException e) {
+			LOG.log(Level.SEVERE, "Error searching events ", e);
+			return Response.serverError().entity(e.getMessage()).build();
+		}catch (Exception e) {
+			LOG.log(Level.SEVERE, "Error searching events ", e);
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
