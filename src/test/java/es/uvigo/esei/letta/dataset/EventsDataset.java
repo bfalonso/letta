@@ -26,7 +26,6 @@ public class EventsDataset {
 				new Event(13, "Title13", "Description13", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
 				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
 				new Event(10, "Title10", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
-<<<<<<< Updated upstream
 				new Event(14, "Title14", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5)
 		};
 	}
@@ -51,9 +50,7 @@ public class EventsDataset {
 				new Event(3, "Title3", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
 				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
 				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
-=======
 				new Event(14, "Title14", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
->>>>>>> Stashed changes
 				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
 				new Event(7, "Title7", "Description7", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
 				new Event(11, "Title11", "Description11", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
