@@ -56,6 +56,13 @@ var EventsDAO = (function () {
 		data : event
 	    }, done, fail, always);
 	};
+	this.addInscription = function(eventId, done, fail, always) {
+	    requestByAjax({
+		url : resourcePath + "/inscription",
+		type : 'POST',
+		data : eventId
+	    }, done, fail, always);
+	};
   }
 
   return EventsDAO;

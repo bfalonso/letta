@@ -22,6 +22,7 @@ var EventsView = (function() {
 			$('#carouselExampleIndicators').show();
 			dao.listRecentEvents(page, function(events) {
 				totalPages = events[1];
+				eventos = [];
 				$.each(events[0], function(key, event) {
 					if(contRow % 3 == 0){
 						rowId = 'events-row-' + contRow;
@@ -78,14 +79,16 @@ var EventsView = (function() {
 						</div>'
 				);
 				if(events.length > 0){
+					eventos = [];
 					$.each(events, function(key, event) {
 						if(contRow % 3 == 0){
 							rowId = 'events-row-' + contRow;
 							rowQuery = '#' + rowId;
 							insertEventsRow($('.' + listContainerId));
 						}
-						contRow++;
-						appendToRow(event);
+						eventos[contRow] = event.id;
+						appendToRow(event, contRow);
+						contRow++;						
 					});
 					
 					if(totalPages > 0) {
@@ -215,6 +218,8 @@ var EventsView = (function() {
 
 
 var eventDetailView = function (index) {
+	$("#inscriptionButton").unbind();
+	$("#inscriptionButton").show();
 	
 	dao.get(eventos[index],
 			function (event){
@@ -224,38 +229,65 @@ var eventDetailView = function (index) {
 				$("#eventDetailNum_participants").text(event.num_participants);
 				$("#eventDetailCapacity").text(event.capacity);
 				$("#eventDetailDuration").text(event.duration);
-				var fecha = event.event_date.split("-");
-				$("#eventDetailEvent_date").text(fecha[2]+"/"+fecha[1]+"/"+fecha[0]);
+				var date = event.event_date.split("-");
+				$("#eventDetailEvent_date").text(date[2]+"/"+date[1]+"/"+date[0]);
+				var aux = date[1]+"/"+date[2]+"/"+date[0];
+				
+				if ($("#inscriptionButton")) {
+					var today = new Date();
+					var dateEvent = new Date(aux);
+					
+					if (event.num_participants == event.capacity
+							|| today > dateEvent) {
+						$("#inscriptionButton").hide();
+					}
+					else{
+						$("#inscriptionButton").click(function(){
+							dao.addInscription({'eventId': event.id}, function() {
+						    	alert('Se ha inscrito correctamente en el evento.');
+						}, function() {
+						    	alert('No se ha podido inscribir en el evento.');
+						})
+						});
+					}
+					
+					
+				}
+				
+				$("#previous").unbind();
+				$("#next").unbind();
+				$("#previous").hide();
+				$("#next").hide();
+				
+				
+				
+				if (index == 0){
+					$("#next").click(function(){eventDetailView(index + 1);});
+					$("#next").show();
+					
+				}
+				else if (index == eventos.length - 1){
+					$("#previous").click(function(){eventDetailView(index - 1);});
+					$("#previous").show();
+					
+				}		
+				else{
+					$("#next").click(function(){eventDetailView(index + 1);});
+					$("#previous").click(function(){eventDetailView(index - 1);});
+					$("#previous").show();
+					$("#next").show();
+					
+				}
+
+				$(".eventDetailModal").show();
+				
 			},
 			function() {
 		    	alert('No ha sido posible acceder al evento.');
 			}		
 	);
 	
-	$("#previous").unbind();
-	$("#next").unbind();
-	$("#previous").hide();
-	$("#next").hide();
 	
-	if (index == 0){
-		$("#next").click(function(){eventDetailView(index + 1);});
-		$("#next").show();
-		
-	}
-	else if (index == eventos.length - 1){
-		$("#previous").click(function(){eventDetailView(index - 1);});
-		$("#previous").show();
-		
-	}		
-	else{
-		$("#next").click(function(){eventDetailView(index + 1);});
-		$("#previous").click(function(){eventDetailView(index - 1);});
-		$("#previous").show();
-		$("#next").show();
-		
-	}
-
-	$(".eventDetailModal").show();
 };
 
 $("#" + formAddId).submit(
