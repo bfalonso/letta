@@ -49,6 +49,13 @@ var EventsDAO = (function () {
         always
       );
     };
+    this.addEvent = function(event, done, fail, always) {
+	    requestByAjax({
+		url : resourcePath,
+		type : 'POST',
+		data : event
+	    }, done, fail, always);
+	};
   }
 
   return EventsDAO;

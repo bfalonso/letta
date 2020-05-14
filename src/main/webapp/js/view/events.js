@@ -1,6 +1,8 @@
 var dao;
 var eventos = [];
 
+var formAddId = "form-add";
+
 var EventsView = (function() {
 	
 	// Referencia a this que permite acceder a las funciones públicas desde las funciones de jQuery.
@@ -254,6 +256,31 @@ var eventDetailView = function (index) {
 	}
 
 	$(".eventDetailModal").show();
+};
+
+$("#" + formAddId).submit(
+
+function() {
+	var event = getEventInForm();
+
+	dao.addEvent(event, function(event) {
+		window.location = 'indexLogged.html';
+	}, function() {
+		alert('No ha sido posible crear el evento.');
+	});
+});
+
+var getEventInForm = function() {
+	var form = $("#" + formAddId);
+	return {
+		'title': form.find('input[name="title"]').val(),
+		'event_date': form.find('input[name="event_date"]').val(),
+		'location': form.find('input[name="location"]').val(),
+		'capacity': form.find('input[name="capacity"]').val(),
+		'duration': form.find('input[name="duration"]').val(),
+		'category': form.find('input[name="category"]').val(),
+		'description': form.find('input[name="description"]').val(),
+	};
 };
 
 

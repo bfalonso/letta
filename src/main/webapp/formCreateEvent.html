@@ -21,31 +21,31 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Crear evento</h5>
-            <form class="form-signin" id="form-signin">
+            <form class="form-add" id="form-add">
               <div class="form-label-group">
              
-                		<input type="text" id="title" name="title" class="form-control"  placeholder="&#xf031  Título" required maxlength="20">
+                	<input type="text" id="title" name="title" class="form-control"  placeholder="&#xf031  Título" required maxlength="20" required>
              		</div>
 		            
 		            <div class="form-label-group">
 		                <input type="text" id="event_date" name="event_date" class="form-control" 
-                    	onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="&#xf073  Fecha evento">
+                    	onfocus="(this.type='datetime-local')"  placeholder="&#xf073  Fecha evento" required>
 		            </div>
 		            
 		            <div class="form-label-group">
-		                <input type="text" id="location" name="location" class="form-control" placeholder="&#xf041  Ubicación">
+		                <input type="text" id="location" name="location" maxlength="30" class="form-control" placeholder="&#xf041  Ubicación" required>
 		            </div>
 		            
 		            <div class="form-label-group">
-		                <input type="text" id="capacity" name="capacity" class="form-control" placeholder="&#xf007  Capacidad">
+		                <input type="number" id="capacity" name="capacity" class="form-control" placeholder="&#xf007  Capacidad" required>
 		            </div>
 		            
 		            <div class="form-label-group">
-		                <input type="number" id="duration" name="duration" class="form-control" placeholder="&#xf017  Duración">
+		                <input type="number" id="duration" name="duration" class="form-control" placeholder="&#xf017  Duración" required>
 		            </div>
 		            
 		            <div class="form-label-group">
-		            <select name="category" id="category" class="form-control" style="border-radius: 2em;height: auto;padding: var(--input-padding-y) var(--input-padding-x);font-family: FontAwesome;color: #717171;">
+		            <select name="category" id="category"  required class="form-control" style="border-radius: 2em;height: auto;padding: var(--input-padding-y) var(--input-padding-x);font-family: FontAwesome;color: #717171;">
   					<option value="" disabled selected>&#xf02b Categoría</option>
   					<option value="sports">Deporte</option> 
   					<option value="cinema">Cine</option>
@@ -64,7 +64,7 @@
 		            </div>
               
               		<div class="text-center">
-              		<button class="btn btn-sm btn-primary text-uppercase" type="submit">Cancelar</button>
+              		<button class="btn btn-sm btn-default text-uppercase" type="submit">Cancelar</button>
               		<button class="btn btn-sm btn-primary text-uppercase" type="submit">Crear</button>
               		</div>
             </form>
@@ -81,6 +81,8 @@
 		src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js">
 	</script>
 	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/dao/events.js"></script>
+	<script type="text/javascript" src="js/view/events.js"></script>
 	
 	<script type="text/javascript">
 
