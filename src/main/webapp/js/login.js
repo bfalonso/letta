@@ -8,14 +8,15 @@ function doLogin(login, password) {
     })
     .done(function() {
 	localStorage.setItem('authorization-token', btoa(login + ":" + password));
-	window.location = 'index.html';
+	window.location = 'indexLogged.html';
     })
     .fail(function() {
 	alert('Invalid login and/or password.');
     });
 }
 
+
 function doLogout() {
     localStorage.removeItem('authorization-token');
-    window.location = 'login.html';
+    window.location = 'index.html';
 }
