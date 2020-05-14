@@ -147,6 +147,27 @@ public class EventsDAO extends DAO {
 		}
 	}
 	
+	public boolean updateNumParticipants(int id, int numParticipants) throws DAOException {
+		try (final Connection conn = this.getConnection()) {
+			final String query = "UPDATE event SET num_participants=? WHERE id=?";
+			try (final PreparedStatement statement = conn.prepareStatement(query)) {
+				statement.setInt(1, numParticipants);
+				statement.setInt(2, id);
+				int result = statement.executeUpdate();
+				if (result > 0) {
+					return true;
+				} 
+				else {
+					return false;
+				}
+			}
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Error creating an event", e);
+			throw new DAOException(e);
+		}
+	}
+	
 	private ResultSet executeQuery(String query, String params) throws SQLException {
 
 		Connection conn = this.getConnection();

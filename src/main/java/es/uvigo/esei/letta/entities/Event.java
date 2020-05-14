@@ -68,6 +68,10 @@ public class Event implements Comparable<Event>{
 	public int getNum_participants() {
 		return num_participants;
 	}
+	
+	public boolean isFull() {
+		return num_participants == capacity;
+	}
 
 	@Override
 	public int compareTo(Event o) {

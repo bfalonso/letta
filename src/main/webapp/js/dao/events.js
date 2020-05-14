@@ -58,7 +58,7 @@ var EventsDAO = (function () {
 	};
 	this.addInscription = function(eventId, done, fail, always) {
 	    requestByAjax({
-		url : resourcePath + "/inscription",
+		url : "rest/inscription",
 		type : 'POST',
 		data : eventId
 	    }, done, fail, always);

@@ -244,7 +244,8 @@ var eventDetailView = function (index) {
 					else{
 						$("#inscriptionButton").click(function(){
 							dao.addInscription({'eventId': event.id}, function() {
-						    	alert('Se ha inscrito correctamente en el evento.');
+						    	// alert('Se ha inscrito correctamente en el evento.');
+						    	window.location = "indexLogged.html"
 						}, function() {
 						    	alert('No se ha podido inscribir en el evento.');
 						})

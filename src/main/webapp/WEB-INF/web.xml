@@ -37,6 +37,11 @@
       <url-pattern>/rest/users/*</url-pattern>
       <http-method>GET</http-method>
     </web-resource-collection>
+    <web-resource-collection>
+      <web-resource-name>Admin Area</web-resource-name>
+      <url-pattern>/rest/inscription/*</url-pattern>
+      <http-method>POST</http-method>
+    </web-resource-collection>
     <auth-constraint>
       <role-name>USER</role-name>
     </auth-constraint>

@@ -11,6 +11,7 @@ import javax.ws.rs.core.Application;
 
 import es.uvigo.esei.letta.rest.EventsResource;
 import es.uvigo.esei.letta.rest.UsersResource;
+import es.uvigo.esei.letta.rest.InscriptionResource;;
 
 @ApplicationPath("/rest/*")
 public class LettaApplication extends Application {
@@ -18,7 +19,8 @@ public class LettaApplication extends Application {
 	public Set<Class<?>> getClasses() {
 		return Stream.of(
 			EventsResource.class,
-			UsersResource.class
+			UsersResource.class,
+			InscriptionResource.class
 		).collect(toSet());
 	}
 	
