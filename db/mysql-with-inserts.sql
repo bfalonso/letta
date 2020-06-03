@@ -1,5 +1,6 @@
 CREATE DATABASE `letta`;
 
+
 CREATE TABLE `letta`.`event` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`title` varchar(20) NOT NULL,
@@ -17,7 +18,17 @@ CREATE TABLE `letta`.`event` (
 CREATE TABLE `letta`.`users` (
 	`login` varchar(100) NOT NULL,
 	`password` varchar(64) NOT NULL,
+	`role` varchar(4) NOT NULL DEFAULT 'USER',
 	PRIMARY KEY (`login`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `letta`.`inscription` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`login` varchar(100) NOT NULL,
+	`event_id` int NOT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`login`) REFERENCES `users`(`login`),
+	FOREIGN KEY (`event_id`) REFERENCES `event`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE USER 'letta'@'localhost' IDENTIFIED WITH mysql_native_password BY 'letta';
@@ -47,3 +58,15 @@ INSERT INTO `letta`.`users` (`login`,`password`) VALUES ("jorge","67c888af8ad80f
 INSERT INTO `letta`.`users` (`login`,`password`) VALUES ("joshua","fc52fabe94c0e037d2df4498e87481a6438960c9f73d517584a7a5c564535ac4");
 INSERT INTO `letta`.`users` (`login`,`password`) VALUES ("daniel","bd3dae5fb91f88a4f0978222dfd58f59a124257cb081486387cbae9df11fb879");
 INSERT INTO `letta`.`users` (`login`,`password`) VALUES ("miguel","5ef68465886fa04d3e0bbe86b59d964dd98e5775e95717df978d8bedee6ff16c");
+
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (1,"brais",1);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (2,"ines",1);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (3,"ruben",3);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (4,"jorge",2);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (5,"miguel",4);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (6,"joshua",5);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (7,"ines",1);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (8,"brais",5);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (9,"ruben",5);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (10,"daniel",6);
+INSERT INTO `letta`.`inscription` (`id`,`login`,`event_id`) VALUES (11,"miguel",6);

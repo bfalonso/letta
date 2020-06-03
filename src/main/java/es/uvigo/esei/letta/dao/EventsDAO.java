@@ -77,7 +77,15 @@ public class EventsDAO extends DAO {
 
 	}
 
-	public List<Event> search(String params) throws DAOException, IllegalArgumentException {
+	public List<Event> search(String params) throws DAOException, IllegalArgumentException, IndexOutOfBoundsException, Exception {
+		/**
+		 * paginated_by = 6
+		 * toret.lenght / paginated_by = numero paginas
+		 * 
+		 * base_limit = (numPagina - 1) * paginated_by
+		 * upper_limit = (numPagina * paginated_by) - 1
+		 * 
+		 */
 		if (!params.isEmpty() && params != null) {
 
 			List<Event> toret = new LinkedList<>();
@@ -125,6 +133,7 @@ public class EventsDAO extends DAO {
 				}
 
 				toret.addAll(orderListbyDate(events2));
+				
 				return toret;
 
 			} catch (SQLException e) {
@@ -137,7 +146,28 @@ public class EventsDAO extends DAO {
 			throw new IllegalArgumentException("Invalid argument in search");
 		}
 	}
-
+	
+	public boolean updateNumParticipants(int id, int numParticipants) throws DAOException {
+		try (final Connection conn = this.getConnection()) {
+			final String query = "UPDATE event SET num_participants=? WHERE id=?";
+			try (final PreparedStatement statement = conn.prepareStatement(query)) {
+				statement.setInt(1, numParticipants);
+				statement.setInt(2, id);
+				int result = statement.executeUpdate();
+				if (result > 0) {
+					return true;
+				} 
+				else {
+					return false;
+				}
+			}
+		}
+		catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Error creating an event", e);
+			throw new DAOException(e);
+		}
+	}
+	
 	private ResultSet executeQuery(String query, String params) throws SQLException {
 
 		Connection conn = this.getConnection();

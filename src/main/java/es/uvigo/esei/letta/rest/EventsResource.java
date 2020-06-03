@@ -1,5 +1,7 @@
 package es.uvigo.esei.letta.rest;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,21 +73,33 @@ public class EventsResource {
 	
 	@GET
 	@Path("/recent")
-	public Response listRecent() {
+	public Response listRecent(@QueryParam("page") int page) {
 		try {
-			return Response.ok(this.dao.listRecent()).build();
-		} catch (DAOException e) {
-			LOG.log(Level.SEVERE, "Error listing events", e);
+			List<Event> totalEvents = this.dao.listRecent();
+			int totalPages =  (int) Math.ceil((double) totalEvents.size() / 6.0);
+			List<Event> pageEvents =  pagination(totalEvents, page * 6);
+			Object[] toret = {pageEvents, totalPages};
+			return Response.ok(toret).build();
+		}
+		catch (DAOException e) {
+			LOG.log(Level.SEVERE, "Error searching events ", e);
+			return Response.serverError().entity(e.getMessage()).build();
+		}catch (Exception e) {
+			LOG.log(Level.SEVERE, "Error searching events ", e);
 			return Response.serverError().entity(e.getMessage()).build();
 		}
 	}
 	
 	@GET
 	// tiene que ser un query param
-	public Response search(@QueryParam("search") String params) {
-
+	public Response search(@QueryParam("search") String params, @QueryParam("page") int page) throws Exception{
+	
 		try {
-			return Response.ok(this.dao.search(params)).build();
+			List<Event> totalEvents = this.dao.search(params);
+			int totalPages =  (int) Math.ceil((double) totalEvents.size() / 6.0);
+			List<Event> pageEvents =  pagination(totalEvents, page * 6);
+			Object[] toret = {pageEvents, totalPages};
+			return Response.ok(toret).build();
 		}
 		catch (IllegalArgumentException iae) {
 			LOG.log(Level.FINE, "Invalid parameter in search method", iae);
@@ -94,6 +108,25 @@ public class EventsResource {
 		catch (DAOException e) {
 			LOG.log(Level.SEVERE, "Error searching events " + params, e);
 			return Response.serverError().entity(e.getMessage()).build();
+		}catch (Exception e) {
+			LOG.log(Level.SEVERE, "Error searching events " + params, e);
+			return Response.serverError().entity(e.getMessage()).build();
 		}
+	}
+	
+	private List<Event> pagination(List<Event> events, int baseIndex) throws Exception{
+		List<Event> toret = new LinkedList<>();
+		
+		for(int i = 0; i < 6; i++ ) {
+			try {
+				toret.add(events.get(baseIndex + i));
+			}catch(IndexOutOfBoundsException e) {
+				return toret;
+			}catch(Exception e) {
+				throw new Exception(e.getMessage());
+			}
+		
+		}
+		return toret;
 	}
 }

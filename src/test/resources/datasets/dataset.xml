@@ -8,4 +8,18 @@
 	<event id="4" title="Title4" description="Description4" event_date="2020-12-10 00:00:00" creation_date="2020-12-10 00:00:00" location="Santander" category="theater" capacity="20" num_participants="20" duration="5" />
 	<event id="5" title="Title5" description="Description5" event_date="2020-12-20 01:00:00" creation_date="2020-12-20 01:00:00" location="Vigo" category="sports" capacity="20" num_participants="15" duration="5" />
 	<event id="6" title="Title6" description="Description6" event_date="2020-12-15 01:00:00" creation_date="2020-12-15 01:00:00" location="Salamanca" category="cinema" capacity="20" num_participants="15" duration="5" />
+	<event id="7"  title="Title7" description="Description7" event_date="2020-12-15 01:00:00" creation_date="2020-12-15 01:00:00" location="Salamanca" category="cinema" capacity="20" num_participants="15" duration="5" />
+	<event id="8" title="Title8" description="Description5" event_date="2020-12-20 01:00:00" creation_date="2020-12-20 01:00:00" location="Vigo" category="sports" capacity="20" num_participants="15" duration="5" />
+	<event id="9" title="Title9" description="Description9" event_date="2020-10-10 00:00:00" creation_date="2020-10-10 00:00:00" location="Ourense" category="theater" capacity="20" num_participants="20" duration="5" />
+	<event id="10" title="Title10" description="Description4" event_date="2020-12-10 00:00:00" creation_date="2020-12-10 00:00:00" location="Santander" category="theater" capacity="20" num_participants="20" duration="5" />
+	<event id="11" title="Title11" description="Description10" event_date="2020-12-15 01:00:00" creation_date="2020-12-15 01:00:00" location="Salamanca" category="cinema" capacity="20" num_participants="15" duration="5" />
+	<event id="12" title="Title12" description="Description5" event_date="2020-12-20 01:00:00" creation_date="2020-12-20 01:00:00" location="Vigo" category="sports" capacity="20" num_participants="15" duration="5" />
+	<event id="13" title="Title13" description="Description13" event_date="2020-10-10 00:00:00" creation_date="2020-10-10 00:00:00" location="Ourense" category="theater" capacity="20" num_participants="20" duration="5" />
+	<event id="14" title="Title14" description="Description4" event_date="2020-12-10 00:00:00" creation_date="2020-12-10 00:00:00" location="Santander" category="theater" capacity="20" num_participants="20" duration="5" />
+	<event id="15" title="Title15" description="Description15" event_date="2020-12-15 01:00:00" creation_date="2020-12-15 01:00:00" location="Salamanca" category="cinema" capacity="20" num_participants="15" duration="5" />
+	<event id="16" title="Title16" description="Description5" event_date="2020-12-20 01:00:00" creation_date="2020-12-20 01:00:00" location="Vigo" category="sports" capacity="20" num_participants="15" duration="5" />
+	
+
+	<users login="normal" password="7bf24d6ca2242430343ab7e3efb89559a47784eea1123be989c1b2fb2ef66e83"/>
+
 </dataset>

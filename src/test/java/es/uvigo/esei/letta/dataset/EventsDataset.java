@@ -22,10 +22,45 @@ public class EventsDataset {
 	public static Event[] eventsSearch() {
 		return new Event[] {
 				new Event(3, "Title3", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
+				new Event(9, "Title9", "Description9", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
+				new Event(13, "Title13", "Description13", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
 				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
-				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
-				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
+				new Event(10, "Title10", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
+				new Event(14, "Title14", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5)
 		};
+	}
+	
+	public static Event[] eventsRecent() {
+		return new Event[] {
+				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(7, "Title7", "Description7", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(8, "Title8", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(11, "Title11", "Description10", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(12, "Title12", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(15, "Title15", "Description15", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(16, "Title16", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
+		};
+	}
+	
+	public static Event[] eventsPagination() {
+		return new Event[] {
+				new Event(1, "Title1" ,"Description1" ,new Date(1570658400000L) ,new Date(1570658400000L) ,"Ourense" ,"cinema" ,20 ,15 ,5 ),
+				new Event(2, "Title2" ,"Description2" ,new Date(1562536800000L) ,new Date(1562536800000L) ,"Pontevedra" ,"sports" ,15 ,8 ,5 ),
+				new Event(3, "Title3", "Description3", new Date(1602331200000L), new Date(1602331200000L), "Ourense", "theater", 20, 20, 5),
+				new Event(4, "Title4", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
+				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(14, "Title14", "Description4", new Date(1607601600000L), new Date(1607601600000L), "Santander", "theater", 20, 20, 5),
+				new Event(6, "Title6", "Description6", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(7, "Title7", "Description7", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(11, "Title11", "Description11", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(15, "Title15", "Description15", new Date(1607990400000L), new Date(1607990400000L), "Salamanca", "cinema", 20, 15, 5),
+				new Event(5, "Title5", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(8, "Title8", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(12, "Title12", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5),
+				new Event(16, "Title16", "Description5", new Date(1608422400000L), new Date(1608422400000L), "Vigo", "sports", 20, 15, 5)
+		};
+		
 	}
 	
 	public static Event[] eventsWithout(int ... ids) {

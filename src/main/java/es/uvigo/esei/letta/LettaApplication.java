@@ -10,13 +10,17 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import es.uvigo.esei.letta.rest.EventsResource;
+import es.uvigo.esei.letta.rest.UsersResource;
+import es.uvigo.esei.letta.rest.InscriptionResource;;
 
 @ApplicationPath("/rest/*")
 public class LettaApplication extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		return Stream.of(
-			EventsResource.class
+			EventsResource.class,
+			UsersResource.class,
+			InscriptionResource.class
 		).collect(toSet());
 	}
 	

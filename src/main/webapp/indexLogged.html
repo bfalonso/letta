@@ -29,7 +29,8 @@
 					<input id="query" name="query" class="form-control mr-sm-2" type="search"
 						placeholder="Buscar" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-					<a class="ml-5 mr-3 btn btn-primary" href="login.html">Iniciar sesión</a>
+					<a href="formCreateEvent.html" class="btn btn-success">Crear evento</a>
+					<a class="ml-5 mr-3 btn btn-primary" id="logout">Cerrar sesión</a>
 				</form>
 			</div>
 	</nav>
@@ -128,10 +129,16 @@
 		src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript" src="js/dao/events.js"></script>
 	<script type="text/javascript" src="js/view/events.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
 	
 	<script type="text/javascript">
 	$(document).ready(
 		function() {
+			
+			$('#logout').click(function(event) {
+				event.preventDefault();
+				doLogout();
+			});
  
 			$('#form-search').submit(function(event) {
 				event.preventDefault();
@@ -240,7 +247,7 @@
 			     			</button>
 			     		</div>
 			     		<div class="col-6">
-							
+							<button id="inscriptionButton" class="btn btn-primary">Inscribirse</button>
 			     		</div>
 			     		<div class="col-1">
 			     			<button id="next" style="border: none; background-color: white">
